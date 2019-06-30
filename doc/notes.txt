@@ -1,0 +1,40 @@
+WhALE is an FSI module for Moose
+
+Fluid solvers default in Moose are acceptable for laminar flow only, so it's
+going to be a bit challenging to get all of the turbulence--will need to read
+around turbulence modeling and then implement the corresponding kernels in
+Moose.
+
+Implementing FSI with an ALE formulation requires the interpolation of boundary
+conditions from the fluid to the structure domain, and adjusting the mesh in
+both domains. The mesh movement adds an additional convective term based on
+the mesh velocity that will need to be implemented.
+
+The code will do the following:
+
+--Solve structure, get deflection and stress of structure based on BCs (might
+    be trivial)
+--Move fluid boundary according to solid deformation.
+--Regularize fluid mesh, get mesh velocity based on timestep difference of mesh
+--Solve fluid, get velocity and pressure based on BCs, must include additional
+    convection due to mesh movement
+--Stress continuity (pressure and viscous) from fluid to solid domain, as well
+    as material velocity.
+--Solve structure, etc.
+
+Alternatively, instead of this staggered approach, can do a fixed point iter-
+ative scheme to converge to a solution in a timestep. In this case, will need
+to have a guess for the deflection and mesh movement (i.e. convection
+velocity term), then get a fluid stress based on that, and go back and forth
+until the stress or deflection is continuous between fluid and solid domains.
+This can take the form of a penalty method kind of solver, once we understand
+that better, and how performance is traded between various schemes.
+
+What do we need:
+ * Interpolation scheme from boundary to boundary, which may be irregular, and
+    normal vectors may not be easy to get because of discontinuities
+ * Mesh regularizer with a couple of options for specific scheme that computes
+    mesh velocity
+ * Some way to couple the mesh convection velocity into the fluid solver
+ * Better viscoelastic models for the larynx
+ * Fixed point iterative solver
