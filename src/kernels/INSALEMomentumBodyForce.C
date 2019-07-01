@@ -28,6 +28,6 @@ INSALEMomentumBodyForce::INSALEMomentumBodyForce(const InputParameters & paramet
 Real
 INSALEMomentumBodyForce::computeQpResidual()
 {
-  // body force term
+  // body force term (note "gravityTerm()" already includes a minus sign from INSBase)
   return _test[_i][_qp] * (gravityTerm()(_component) - _ffn.value(_t, _q_point[_qp]));
 }
