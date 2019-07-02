@@ -18,6 +18,7 @@
   type = FileMesh
   file = ../mesh/fluid.msh
   dim = 2 # Must be supplied for GMSH generated meshes
+  # uniform_refine = 1 # Use for refining mesh
 []
 
 # Set material parameters based on mesh regions
