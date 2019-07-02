@@ -26,4 +26,6 @@ Plane Surface(1) = {1};
 Physical Surface("solid") = {1};
 
 Physical Line("fixed") = {4};
-Physical Line("dam") = {1, 2, 3};
+Physical Line("left") = {1};
+Physical Line("top") = {2};
+Physical Line("right") = {3};
