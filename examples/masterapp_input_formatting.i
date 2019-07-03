@@ -1,5 +1,15 @@
 ## Header comments
 
+# These are the apps that need to be linked together
+[MultiApps]
+
+[]
+
+# Which variables need to be transferred to and from where, and when/how
+[Transfers]
+
+[]
+
 # Global parameters that will be set for all kernels in the simulation
 [GlobalParams]
 

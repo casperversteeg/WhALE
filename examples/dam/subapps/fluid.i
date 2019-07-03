@@ -61,6 +61,22 @@
     order = SECOND
     family = LAGRANGE
   [../]
+
+  # The order and family must match the order of the velocity element
+  [./fluid_stress_x]
+    order = SECOND
+  [../]
+  [./fluid_stress_y]
+    order = SECOND
+  [../]
+  [./fluid_traction_x]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./fluid_traction_y]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
 []
 
 # All the terms in the weak form that need to be solved in this simulation
@@ -110,17 +126,28 @@
     type = INSALEMomentumTraction
     variable = vel_x
     component = 0
+    save_in = fluid_stress_x
   [../]
   [./traction_y]
     type = INSALEMomentumTraction
     variable = vel_y
     component = 1
+    save_in = fluid_stress_y
   [../]
 []
 
 # Operations defined on auxiliary variables that will be computed at end
 [AuxKernels]
-
+  [./fluid_traction_x]
+    type = SelfAux
+    variable = fluid_stress_x
+    boundary = 'dam_left dam_top dam_right'
+  [../]
+  [./fluid_traction_y]
+    type = SelfAux
+    variable = fluid_stress_y
+    boundary = 'dam_left dam_top dam_right'
+  [../]
 []
 
 # Model boundary conditions that need to be enforced
@@ -140,13 +167,13 @@
   [./x_noslip]
     type = DirichletBC
     variable = vel_x
-    boundary = 'no_slip dam'
+    boundary = 'no_slip dam_left dam_top dam_right'
     value = 0.0
   [../]
   [./y_noslip]
     type = DirichletBC
     variable = vel_y
-    boundary = 'no_slip dam'
+    boundary = 'no_slip dam_left dam_top dam_right'
     value = 0.0
   [../]
 []
@@ -176,9 +203,9 @@
   l_tol = 1e-6
   l_max_its = 300
   dt = 0.5e-5
-  end_time = 1e-3
 
   # PETSc solver options
+  petsc_options = '-snes_converged_reason -ksp_converged_reason'
   petsc_options_iname = '-pc_type -pc_factor_mat_solver_package '
   petsc_options_value = 'lu       superlu_dist'
 []

@@ -34,7 +34,6 @@
 
 # Variables in the problem's governing equations which must be solved
 [Variables]
-
 []
 
 # Auxiliary variables used for postprocessing and passing data between apps
@@ -47,13 +46,13 @@
   [../]
   [./accel_y]
   [../]
-  [./stress_yy]
-    order = CONSTANT
+  [./sigma_x]
     family = MONOMIAL
+    order = CONSTANT
   [../]
-  [./strain_yy]
-    order = CONSTANT
+  [./sigma_y]
     family = MONOMIAL
+    order = CONSTANT
   [../]
 []
 
@@ -121,20 +120,6 @@
     gamma = 0.6
     execute_on = timestep_end
   [../]
-  [./stress_yy]
-    type = RankTwoAux
-    rank_two_tensor = stress
-    variable = stress_yy
-    index_i = 0
-    index_j = 1
-  [../]
-  [./strain_yy]
-    type = RankTwoAux
-    rank_two_tensor = total_strain
-    variable = strain_yy
-    index_i = 0
-    index_j = 1
-  [../]
 []
 
 # Model boundary conditions that need to be enforced
@@ -151,18 +136,24 @@
     variable = disp_y
     value = 0
   [../]
-  [./pressure]
-    type = Pressure
-    boundary = 'left'
-    function = '1e3'
-    component = 0
+  [./fsi_traction_x]
+    type = BCfromAux
+    bc_type = traction
+    boundary = 'left top right'
     variable = disp_x
+    aux_variable = sigma_x
+  [../]
+  [./fsi_traction_y]
+    type = BCfromAux
+    bc_type = traction
+    boundary = 'left top right'
+    variable = disp_y
+    aux_variable = sigma_y
   [../]
 []
 
 # Define postprocessor operations that can be used for viewing data/statistics
 [Postprocessors]
-
 []
 
 # Set up matrix preconditioner to improve convergence
@@ -185,10 +176,10 @@
   nl_max_its = 30
   l_tol = 1e-6
   l_max_its = 300
-  dt = 1e-4
-  end_time = 0.2e-1
+  dt = 0.5e-5
 
   # PETSc solver options
+  petsc_options = '-snes_converged_reason -ksp_converged_reason'
   petsc_options_iname = '-pc_type -pc_factor_mat_solver_package '
   petsc_options_value = 'lu       superlu_dist'
 []
