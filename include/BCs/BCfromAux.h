@@ -1,7 +1,7 @@
 #pragma once
 
-// #include "NodalBC.h"
-#include "IntegratedBC.h"
+#include "Assembly.h"
+#include "NodalBC.h"
 #include "MooseEnum.h"
 
 // Forward Declarations
@@ -13,7 +13,7 @@ InputParameters validParams<BCfromAux>();
 // This class ports a boundary condition from an auxiliary variable, used in
 // multiapp transfers with interpolation
 
-class BCfromAux : public IntegratedBC
+class BCfromAux : public NodalBC
 {
 public:
   // Constructor
@@ -40,4 +40,18 @@ protected:
   // The variable that couples into this boundary condition
   const VariableValue & _aux_variable;
   const MooseEnum _bc_type;
+
+  // shape functions
+
+  /// shape function values (in QPs)
+  const VariablePhiValue & _phi;
+  /// gradients of shape functions (in QPs)
+  const VariablePhiGradient & _grad_phi;
+
+  // test functions
+
+  /// test function values (in QPs)
+  const VariableTestValue & _test;
+  /// gradients of test functions  (in QPs)
+  const VariableTestGradient & _grad_test;
 };

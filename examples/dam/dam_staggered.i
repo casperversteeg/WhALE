@@ -6,13 +6,16 @@
     type = TransientMultiApp
     app_type = whaleApp
     input_files = subapps/structure.i
+    positions = '0.0 0.0 0.0'
     execute_on = 'TIMESTEP_BEGIN'
-    catch_up = true
+    sub_cycling = true
+    output_sub_cycles = true
   [../]
   [./Fluid]
     type = TransientMultiApp
     app_type = whaleApp
     input_files = subapps/fluid.i
+    positions = '0.0 0.0 0.0'
     execute_on = 'TIMESTEP_END'
   [../]
 []
@@ -93,6 +96,9 @@
 ## Everything below here will be done in between transfers (mesh regularizer)
 # Global parameters that will be set for all kernels in the simulation
 [GlobalParams]
+  use_displaced_mesh = true
+  displaced_target_mesh = true
+  displaced_source_mesh = true
 []
 
 # Load or build mesh file for this problem.
@@ -178,26 +184,32 @@
     variable = mesh_disp_x
     boundary = 'inlet outlet no_slip'
     value = 0
+    use_displaced_mesh = true
   [../]
   [./fluid_fix_y]
     type = DirichletBC
     variable = mesh_disp_y
     boundary = 'inlet outlet no_slip'
     value = 0
+    use_displaced_mesh = true
   [../]
 
   # These are the fluid boundaries subject to displacement due to solid
   [./fsi_boundary_x]
     type = BCfromAux
+    bc_type = dirichlet
     variable = mesh_disp_x
     aux_variable = solid_bc_store_x
     boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
   [../]
   [./fsi_boundary_y]
     type = BCfromAux
+    bc_type = dirichlet
     variable = mesh_disp_y
     aux_variable = solid_bc_store_y
     boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
   [../]
 []
 
@@ -225,8 +237,7 @@
   nl_max_its = 30
   l_tol = 1e-6
   l_max_its = 300
-  dt = 1e-4
-  end_time = 0.2e-1
+  end_time = 0.2e-3
 
   # PETSc solver options
   # petsc_options = '-snes_converged_reason -ksp_converged_reason'

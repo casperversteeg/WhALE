@@ -2,16 +2,13 @@
  /home/casperversteeg/MOOSE/whale/build/unity_src/BCs_Unity.C \
  /home/casperversteeg/MOOSE/whale/src/BCs/BCfromAux.C \
  /home/casperversteeg/MOOSE/whale/build/header_symlinks/BCfromAux.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBC.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBCBase.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BoundaryCondition.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseObject.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InputParameters.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseUtils.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/HashMap.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Assembly.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseArray.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseError.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Moose.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/perf_log.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_common.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/ignore_warnings.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/restore_warnings.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_base.h \
@@ -19,20 +16,15 @@
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_exceptions.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/ostream_proxy.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_nullptr.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads_pthread.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_logging.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/perf_log.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InfixIterator.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumItem.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseError.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Moose.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/XTermConstants.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseException.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads_pthread.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_logging.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/print_trace.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/compare_types.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/raw_type.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseTypes.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DualReal.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/compare_types.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/parallel.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/attributes.h \
@@ -120,50 +112,8 @@
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/reference_counter.h \
  /home/casperversteeg/MOOSE/moose/framework/contrib/boost/include/bitmask_operators.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/tensor_tools.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MultiMooseEnum.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumBase.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ExecFlagEnum.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Conversion.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_order.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_quadrature_type.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fparser.hh \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStreamInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStream.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Registry.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SetupInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnum.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ParallelUniqueId.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FunctionInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DistributionInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FEProblemBase.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SubProblem.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Problem.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraphInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGuard.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraph.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfNode.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IndirectSort.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DiracKernelInfo.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/GeometricSearchData.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/coupling_matrix.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarData.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AutomaticMortarGeneration.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarSegmentInfo.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseHashing.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/equation_systems.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/system.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/elem_range.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/mesh_base.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dof_object.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/multi_predicates.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/single_predicates.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point_locator_base.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/variant_filter_iterator.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/simple_range.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_subset_solve_mode.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_parallel_type.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_function_base.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix_base.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_vector.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_vector_base.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/Eigen/Core \
@@ -262,19 +212,80 @@
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/Eigen/src/Core/ArrayWrapper.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/Eigen/src/Core/GlobalFunctions.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/Eigen/src/Core/util/ReenableStupidWarnings.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_context.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/diff_context.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix_base.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_submatrix.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_subvector.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_quadrature_type.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_type.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_order.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_fe_family.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_inf_map_type.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_base.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_abstract.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/type_vector.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/numberarray.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/compare_types.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/ct_types.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/raw_type.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_decl.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualderivatives.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/testable.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate_decl.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/NodalBC.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/NodalBCBase.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BoundaryCondition.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseObject.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InputParameters.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseUtils.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/HashMap.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InfixIterator.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumItem.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MultiMooseEnum.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumBase.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ExecFlagEnum.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Conversion.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fparser.hh \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStreamInterface.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStream.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Registry.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SetupInterface.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnum.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ParallelUniqueId.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FunctionInterface.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DistributionInterface.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FEProblemBase.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SubProblem.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Problem.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraphInterface.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGuard.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraph.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfNode.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IndirectSort.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DiracKernelInfo.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/GeometricSearchData.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/coupling_matrix.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarData.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AutomaticMortarGeneration.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarSegmentInfo.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseHashing.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/equation_systems.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/system.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/elem_range.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/mesh_base.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dof_object.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/multi_predicates.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/single_predicates.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point_locator_base.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/variant_filter_iterator.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/simple_range.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_subset_solve_mode.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_parallel_type.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_function_base.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_context.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/diff_context.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_submatrix.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_subvector.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_base.h \
+ /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_abstract.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/vector_value.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_map.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/tensor_value.h \
@@ -305,15 +316,6 @@
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/RankThreeTensor.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/RankFourTensor.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseADWrapper.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/numberarray.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/compare_types.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/ct_types.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_decl.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualderivatives.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/testable.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate.h \
- /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate_decl.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/VectorPostprocessorData.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Adaptivity.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/mesh_refinement.h \
@@ -325,7 +327,6 @@
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BoundaryRestrictable.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialData.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialProperty.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseArray.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyStorage.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BlockRestrictable.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/TransientInterface.h \
@@ -397,32 +398,25 @@
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/RandomInterface.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/CoupleableMooseVariableDependencyIntermediateInterface.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ScalarCoupleable.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyInterface.h
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h
 
 /home/casperversteeg/MOOSE/whale/src/BCs/BCfromAux.C:
 
 /home/casperversteeg/MOOSE/whale/build/header_symlinks/BCfromAux.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBC.h:
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Assembly.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBCBase.h:
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseArray.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BoundaryCondition.h:
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseError.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseObject.h:
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Moose.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InputParameters.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseUtils.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/HashMap.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h:
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/perf_log.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_common.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/ignore_warnings.h:
 
@@ -438,33 +432,23 @@
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_nullptr.h:
 
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads_pthread.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_logging.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/perf_log.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InfixIterator.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumItem.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseError.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Moose.h:
-
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/XTermConstants.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseException.h:
 
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/threads_pthread.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_logging.h:
+
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/print_trace.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/compare_types.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/raw_type.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseTypes.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DualReal.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/compare_types.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh.h:
 
@@ -640,93 +624,9 @@
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/tensor_tools.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MultiMooseEnum.h:
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumBase.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ExecFlagEnum.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Conversion.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_order.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_quadrature_type.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fparser.hh:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStreamInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStream.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Registry.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SetupInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnum.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ParallelUniqueId.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FunctionInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DistributionInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FEProblemBase.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SubProblem.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Problem.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraphInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGuard.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraph.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfNode.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IndirectSort.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DiracKernelInfo.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/GeometricSearchData.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/coupling_matrix.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarData.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AutomaticMortarGeneration.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarSegmentInfo.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseHashing.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/equation_systems.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/system.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/elem_range.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/mesh_base.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dof_object.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/multi_predicates.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/single_predicates.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point_locator_base.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/variant_filter_iterator.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/simple_range.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_subset_solve_mode.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_parallel_type.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_function_base.h:
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix_base.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_vector.h:
 
@@ -924,31 +824,153 @@
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/Eigen/src/Core/util/ReenableStupidWarnings.h:
 
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_context.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/diff_context.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_matrix_base.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_submatrix.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_subvector.h:
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_quadrature_type.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_type.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_order.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_fe_family.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_inf_map_type.h:
 
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_base.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_abstract.h:
-
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/type_vector.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/numberarray.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/compare_types.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/ct_types.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/raw_type.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_decl.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualderivatives.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/testable.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate_decl.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/NodalBC.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/NodalBCBase.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/BoundaryCondition.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseObject.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InputParameters.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseUtils.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/HashMap.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/InfixIterator.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumItem.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MultiMooseEnum.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnumBase.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ExecFlagEnum.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Conversion.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fparser.hh:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/libmesh_config.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStreamInterface.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ConsoleStream.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Registry.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SetupInterface.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseEnum.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ParallelUniqueId.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FunctionInterface.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DistributionInterface.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/FEProblemBase.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/SubProblem.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Problem.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraphInterface.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGuard.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfGraph.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/PerfNode.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IndirectSort.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/DiracKernelInfo.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/GeometricSearchData.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/coupling_matrix.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarData.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AutomaticMortarGeneration.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MortarSegmentInfo.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseHashing.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/equation_systems.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/system.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/elem_range.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/mesh_base.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dof_object.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/multi_predicates.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/single_predicates.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point_locator_base.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/variant_filter_iterator.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/simple_range.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_subset_solve_mode.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/enum_parallel_type.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_function_base.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fem_context.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/diff_context.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_submatrix.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/dense_subvector.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_base.h:
+
+/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/fe_abstract.h:
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/vector_value.h:
 
@@ -1010,24 +1032,6 @@
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseADWrapper.h:
 
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/numberarray.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/compare_types.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/ct_types.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_decl.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualderivatives.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/testable.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate.h:
-
-/home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/metaphysicl/dualnumber_surrogate_decl.h:
-
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/VectorPostprocessorData.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Adaptivity.h:
@@ -1049,8 +1053,6 @@
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialData.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialProperty.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseArray.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyStorage.h:
 
@@ -1195,5 +1197,3 @@
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ScalarCoupleable.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h:
-
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyInterface.h:

@@ -6,8 +6,7 @@ template <>
 InputParameters
 validParams<BCfromAux>()
 {
-  InputParameters params = validParams<IntegratedBC>(); // include parent class name
-
+  InputParameters params = validParams<NodalBC>(); // include parent class name
   params.addRequiredCoupledVar("aux_variable",
                                "Auxiliary variable that this boundary should enforce");
   params.addParam<MooseEnum>("bc_type",
@@ -18,9 +17,13 @@ validParams<BCfromAux>()
 }
 
 BCfromAux::BCfromAux(const InputParameters & parameters)
-  : IntegratedBC(parameters),
-    _aux_variable(coupledValue("aux_variable")),
-    _bc_type(getParam<MooseEnum>("bc_type"))
+  : NodalBC(parameters), // NodalBC includes _var (the variable this operates on)
+    _aux_variable(NodalBC::coupledValue("aux_variable")),
+    _bc_type(NodalBC::getParam<MooseEnum>("bc_type")),
+    _phi(_assembly.phiFace(_var)),
+    _grad_phi(_assembly.gradPhiFace(_var)),
+    _test(_var.phiFace()),
+    _grad_test(_var.gradPhiFace())
 {
 }
 
@@ -30,10 +33,24 @@ BCfromAux::computeQpResidual()
   switch (_bc_type)
   {
     case DIRICHLET:
-      return _u[_qp] - _aux_variable[_qp];
+      return _u[_qp] - _aux_variable[_qp]; // NodalBC::computeQpResidual();
     case TRACTION:
-      return _test[_i][_qp] * _aux_variable[_qp];
+      return 0;
+      // return IntegratedBC::_test[_i][IntegratedBC::_qp] *
+      //        _aux_variable[IntegratedBC::_qp]; // IntegratedBC::computeQpResidual();
     default:
-      mooseError("bc_type is not one of the accepted parameters (dirichlet/traction)");
+      NodalBC::mooseError("bc_type is not one of the accepted parameters (dirichlet/traction)");
   }
 }
+//
+// Real
+// BCfromAux::NodalBC::computeQpResidual()
+// {
+//   return _u[_qp] - _aux_variable[_qp];
+// }
+//
+// Real
+// BCfromAux::IntegratedBC::computeQpResidual()
+// {
+//   return -_test[_i][_qp] * _aux_variable[_qp];
+// }

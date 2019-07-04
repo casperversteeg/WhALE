@@ -69,6 +69,8 @@
   [./fluid_stress_y]
     order = SECOND
   [../]
+
+  # These are the boundary-only versions of the fluid stresses above
   [./fluid_traction_x]
     order = CONSTANT
     family = MONOMIAL
@@ -139,13 +141,15 @@
 # Operations defined on auxiliary variables that will be computed at end
 [AuxKernels]
   [./fluid_traction_x]
-    type = SelfAux
-    variable = fluid_stress_x
+    type = CoupledAux
+    coupled = fluid_stress_x
+    variable = fluid_traction_x
     boundary = 'dam_left dam_top dam_right'
   [../]
   [./fluid_traction_y]
-    type = SelfAux
-    variable = fluid_stress_y
+    type = CoupledAux
+    coupled = fluid_stress_y
+    variable = fluid_traction_y
     boundary = 'dam_left dam_top dam_right'
   [../]
 []

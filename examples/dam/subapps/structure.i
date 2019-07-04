@@ -18,15 +18,12 @@
     type = ComputeIsotropicElasticityTensor
     youngs_modulus = 1e8
     poissons_ratio = 0.3
-    block = 'solid'
   [../]
   [./_elastic_stress1]
     type = ComputeFiniteStrainElasticStress
-    block = 'solid'
   [../]
   [./density]
     type = GenericConstantMaterial
-    block = 'solid'
     prop_names = 'density'
     prop_values = '1e2'
   [../]
@@ -120,6 +117,20 @@
     gamma = 0.6
     execute_on = timestep_end
   [../]
+  [./sigma_x_comp]
+    type = RankTwoAux
+    rank_two_tensor = stress      # this is the name of the material property
+    index_i = 0                   # this is the first index, i, from 0 to 2
+    index_j = 0                   # this is the 2nd index, j, from 0 to 2
+    variable = sigma_x
+  [../]
+  [./sigma_y_comp]
+    type = RankTwoAux
+    rank_two_tensor = stress      # this is the name of the material property
+    index_i = 1                   # this is the first index, i, from 0 to 2
+    index_j = 1                   # this is the 2nd index, j, from 0 to 2
+    variable = sigma_y
+  [../]
 []
 
 # Model boundary conditions that need to be enforced
@@ -136,19 +147,26 @@
     variable = disp_y
     value = 0
   [../]
-  [./fsi_traction_x]
-    type = BCfromAux
-    bc_type = traction
-    boundary = 'left top right'
+  # [./fsi_traction_x]
+  #   type = BCfromAux
+  #   bc_type = traction
+  #   boundary = 'left top right'
+  #   variable = disp_x
+  #   aux_variable = sigma_x
+  # [../]
+  # [./fsi_traction_y]
+  #   type = BCfromAux
+  #   bc_type = traction
+  #   boundary = 'left top right'
+  #   variable = disp_y
+  #   aux_variable = sigma_y
+  # [../]
+  [./pressure]
+    type = Pressure
+    boundary = 'left'
+    function = '1e3'
+    component = 0
     variable = disp_x
-    aux_variable = sigma_x
-  [../]
-  [./fsi_traction_y]
-    type = BCfromAux
-    bc_type = traction
-    boundary = 'left top right'
-    variable = disp_y
-    aux_variable = sigma_y
   [../]
 []
 
