@@ -1,7 +1,7 @@
 /home/casperversteeg/MOOSE/whale/build/unity_src/BCs_Unity.x86_64-pc-linux-gnu.opt.lo: \
  /home/casperversteeg/MOOSE/whale/build/unity_src/BCs_Unity.C \
- /home/casperversteeg/MOOSE/whale/src/BCs/BCfromAux.C \
- /home/casperversteeg/MOOSE/whale/build/header_symlinks/BCfromAux.h \
+ /home/casperversteeg/MOOSE/whale/src/BCs/DirichletBCfromAux.C \
+ /home/casperversteeg/MOOSE/whale/build/header_symlinks/DirichletBCfromAux.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Assembly.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseArray.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseError.h \
@@ -398,11 +398,16 @@
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/RandomInterface.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/CoupleableMooseVariableDependencyIntermediateInterface.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ScalarCoupleable.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h \
+ /home/casperversteeg/MOOSE/whale/src/BCs/TractionBCfromAux.C \
+ /home/casperversteeg/MOOSE/whale/build/header_symlinks/TractionBCfromAux.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBC.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBCBase.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyInterface.h
 
-/home/casperversteeg/MOOSE/whale/src/BCs/BCfromAux.C:
+/home/casperversteeg/MOOSE/whale/src/BCs/DirichletBCfromAux.C:
 
-/home/casperversteeg/MOOSE/whale/build/header_symlinks/BCfromAux.h:
+/home/casperversteeg/MOOSE/whale/build/header_symlinks/DirichletBCfromAux.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Assembly.h:
 
@@ -1197,3 +1202,13 @@
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/ScalarCoupleable.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseVariableDependencyInterface.h:
+
+/home/casperversteeg/MOOSE/whale/src/BCs/TractionBCfromAux.C:
+
+/home/casperversteeg/MOOSE/whale/build/header_symlinks/TractionBCfromAux.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBC.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/IntegratedBCBase.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MaterialPropertyInterface.h:

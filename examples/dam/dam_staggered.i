@@ -7,16 +7,18 @@
     app_type = whaleApp
     input_files = subapps/structure.i
     positions = '0.0 0.0 0.0'
-    execute_on = 'TIMESTEP_BEGIN'
+    execute_on = 'timestep_begin'
     sub_cycling = true
     output_sub_cycles = true
+    use_displaced_mesh = true
   [../]
   [./Fluid]
     type = TransientMultiApp
     app_type = whaleApp
     input_files = subapps/fluid.i
     positions = '0.0 0.0 0.0'
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
 []
 
@@ -29,7 +31,7 @@
     multi_app = Solid
     source_variable = disp_x
     variable = solid_bc_store_x
-    execute_on = 'TIMESTEP_BEGIN'
+    execute_on = 'timestep_begin'
   [../]
   [./take_disp_from_solid_y]
     type = MultiAppInterpolationTransfer
@@ -37,7 +39,7 @@
     multi_app = Solid
     source_variable = disp_y
     variable = solid_bc_store_y
-    execute_on = 'TIMESTEP_BEGIN'
+    execute_on = 'timestep_begin'
   [../]
 
   # Regularize fluid mesh and export displacements to fluid subapp
@@ -47,7 +49,7 @@
     multi_app = Fluid
     source_variable = mesh_disp_x
     variable = disp_x
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
   [../]
   [./send_mesh_disp_to_fluid_y]
     type = MultiAppCopyTransfer
@@ -55,7 +57,7 @@
     multi_app = Fluid
     source_variable = mesh_disp_y
     variable = disp_y
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
   [../]
 
   # Solve the fluid tractions along boundary, send from fluid to solid
@@ -63,17 +65,22 @@
     type = MultiAppCopyTransfer
     direction = from_multiapp
     multi_app = Fluid
+    # source_variable = fluid_bc_store_x
+    # variable = fluid_traction_x
     source_variable = fluid_traction_x
     variable = fluid_bc_store_x
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
   [./take_traction_from_fluid_y]
     type = MultiAppCopyTransfer
     direction = from_multiapp
     multi_app = Fluid
+    # source_variable = fluid_bc_store_y
+    # variable = fluid_traction_y
     source_variable = fluid_traction_y
     variable = fluid_bc_store_y
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
   [../]
   [./send_traction_to_solid_x]
     type = MultiAppInterpolationTransfer
@@ -81,7 +88,7 @@
     multi_app = Solid
     source_variable = fluid_bc_store_x
     variable = sigma_x
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
   [../]
   [./send_traction_to_solid_y]
     type = MultiAppInterpolationTransfer
@@ -89,16 +96,17 @@
     multi_app = Solid
     source_variable = fluid_bc_store_y
     variable = sigma_y
-    execute_on = 'TIMESTEP_END'
+    execute_on = 'timestep_end'
   [../]
 []
 
 ## Everything below here will be done in between transfers (mesh regularizer)
 # Global parameters that will be set for all kernels in the simulation
 [GlobalParams]
-  use_displaced_mesh = true
+  # use_displaced_mesh = true
   displaced_target_mesh = true
   displaced_source_mesh = true
+  displacements = 'mesh_disp_x mesh_disp_y'
 []
 
 # Load or build mesh file for this problem.
@@ -109,18 +117,18 @@
 
 # Set material parameters based on mesh regions
 [Materials]
+  [./elasticity_tensor]
+    type = ComputeIsotropicElasticityTensor
+    youngs_modulus = 1
+    poissons_ratio = 0
+  [../]
+  [./_elastic_stress1]
+    type = ComputeFiniteStrainElasticStress
+  [../]
 []
 
 # Variables in the problem's governing equations which must be solved
 [Variables]
-  [./mesh_disp_x]
-    family = LAGRANGE
-    order = SECOND
-  [../]
-  [./mesh_disp_y]
-    family = LAGRANGE
-    order = SECOND
-  [../]
 []
 
 # Auxiliary variables used for postprocessing and passing data between apps
@@ -141,39 +149,20 @@
     family = MONOMIAL
     order = CONSTANT
   [../]
-
-  # Additional variable to keep track of mesh quality
-  [./mesh_quality]
-    family = MONOMIAL
-    order = CONSTANT
-  [../]
 []
 
 # All the terms in the weak form that need to be solved in this simulation
-[Kernels]
-  # These will diffuse the fluid mesh to preserve mesh quality. Even though the
-  # executioner is transient, these will be solved to steady state, since there
-  # are no time-dependent kernels included here, so the equation will simply
-  # look like Lap(u) = 0
-  [./diffuse_mesh_x]
-    type = Diffusion
-    variable = mesh_disp_x
-    use_displaced_mesh = true
-  [../]
-  [./diffuse_mesh_y]
-    type = Diffusion
-    variable = mesh_disp_y
+[Modules/TensorMechanics/Master]
+  [./solid]
+    strain = FINITE
+    add_variables = true
+    block = 'fluid'
     use_displaced_mesh = true
   [../]
 []
 
 # Operations defined on auxiliary variables that will be computed at end
 [AuxKernels]
-  [./mesh_quality]
-    type = ElementQualityAux
-    variable = mesh_quality
-    metric = SHAPE
-  [../]
 []
 
 # Model boundary conditions that need to be enforced
@@ -196,16 +185,14 @@
 
   # These are the fluid boundaries subject to displacement due to solid
   [./fsi_boundary_x]
-    type = BCfromAux
-    bc_type = dirichlet
+    type = DirichletBCfromAux
     variable = mesh_disp_x
     aux_variable = solid_bc_store_x
     boundary = 'dam_left dam_top dam_right'
     use_displaced_mesh = true
   [../]
   [./fsi_boundary_y]
-    type = BCfromAux
-    bc_type = dirichlet
+    type = DirichletBCfromAux
     variable = mesh_disp_y
     aux_variable = solid_bc_store_y
     boundary = 'dam_left dam_top dam_right'
@@ -232,12 +219,12 @@
   solve_type = NEWTON
 
   # Nonlinear solver parameters for nonlinear iterations and linear subiterations
-  nl_rel_tol = 1e-6
-  nl_abs_tol = 1e-10
-  nl_max_its = 30
+  nl_rel_tol = 1e-5
+  nl_abs_tol = 1e-7
+  nl_max_its = 15
   l_tol = 1e-6
   l_max_its = 300
-  end_time = 0.2e-3
+  end_time = 1e-2
 
   # PETSc solver options
   # petsc_options = '-snes_converged_reason -ksp_converged_reason'
@@ -250,3 +237,5 @@
   interval = 1
   print_linear_residuals = true
 []
+
+# SEE IF WE CAN FIX THIS WITH CONTROLS BECAUSE THIS IS SOME BULLSHIT

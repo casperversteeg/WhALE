@@ -19,6 +19,7 @@
   file = ../mesh/fluid.msh
   dim = 2 # Must be supplied for GMSH generated meshes
   # uniform_refine = 1 # Use for refining mesh
+  displacements = 'disp_x disp_y'
 []
 
 # Set material parameters based on mesh regions
@@ -78,6 +79,12 @@
   [./fluid_traction_y]
     order = CONSTANT
     family = MONOMIAL
+  [../]
+
+  # Just to observe the quality of the fluid mesh:
+  [./mesh_quality]
+    family = MONOMIAL
+    order = CONSTANT
   [../]
 []
 
@@ -145,22 +152,31 @@
     coupled = fluid_stress_x
     variable = fluid_traction_x
     boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
   [../]
   [./fluid_traction_y]
     type = CoupledAux
     coupled = fluid_stress_y
     variable = fluid_traction_y
     boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
+  [../]
+
+  [./mesh_quality]
+    type = ElementQualityAux
+    variable = mesh_quality
+    metric = SHAPE
   [../]
 []
 
 # Model boundary conditions that need to be enforced
 [BCs]
   [./inlet]
-    type = DirichletBC
+    type = FunctionDirichletBC
     variable = vel_x
     boundary = 'inlet'
-    value = 1e0
+    # value = 0.0 #1e0
+    function = '10 * (-exp(-1e3 *t) + 1)'
   [../]
   [./outlet]
     type = DirichletBC
@@ -206,7 +222,7 @@
   nl_max_its = 30
   l_tol = 1e-6
   l_max_its = 300
-  dt = 0.5e-5
+  dt = 1e-5
 
   # PETSc solver options
   petsc_options = '-snes_converged_reason -ksp_converged_reason'
