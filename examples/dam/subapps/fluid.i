@@ -174,11 +174,11 @@
 [BCs]
   [./inlet]
     type = FunctionDirichletBC
-    variable = vel_x
+    variable = pressure
     boundary = 'inlet'
     # value = 0.0 #1e0
     # function = '100 * (-exp(-1e3 *t) + 1)'
-    function = '10'
+    function = '100'
     use_displaced_mesh = true
   [../]
   [./outlet]
