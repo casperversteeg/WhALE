@@ -36,7 +36,7 @@ protected:
   virtual Real computeQpOffDiagJacobianViscousPart(unsigned jvar) = 0;
 
   // Common variables across all INS ALE kernels
-  unsigned _component;
-  bool _integrate_p_by_parts;
+  const unsigned & _component;
+  const bool & _integrate_p_by_parts;
   const Function & _ffn;
 };

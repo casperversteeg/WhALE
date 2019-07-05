@@ -41,7 +41,7 @@ protected:
   virtual Real computeQpOffDiagJacobianViscousPart(unsigned jvar) { return 0; };
 
   // Setting stabilized upwind Petrov-Galerkin stabilization
-  bool _supg;
+  const bool & _supg;
   virtual Real computeQpPGResidual();
   virtual Real computeQpPGJacobian(unsigned comp);
 

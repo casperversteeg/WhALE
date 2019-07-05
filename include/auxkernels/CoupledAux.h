@@ -34,10 +34,9 @@ public:
 protected:
   virtual Real computeValue();
 
-  Real _value;         ///< The value being set for this kernel
-  MooseEnum _operator; ///< Operator being applied on this variable and coupled variable
+  const Real & _value;         ///< The value being set for this kernel
+  const MooseEnum & _operator; ///< Operator being applied on this variable and coupled variable
 
-  int _coupled;                       ///< The number of the coupled variable
+  const int & _coupled;               ///< The number of the coupled variable
   const VariableValue & _coupled_val; ///< Coupled variable
 };
-

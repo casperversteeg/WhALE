@@ -166,7 +166,7 @@
   [./mesh_quality]
     type = ElementQualityAux
     variable = mesh_quality
-    metric = SHAPE
+    metric = DISTORTION
   [../]
 []
 
