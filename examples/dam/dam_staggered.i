@@ -8,8 +8,9 @@
     input_files = subapps/structure.i
     positions = '0.0 0.0 0.0'
     execute_on = 'timestep_begin'
-    sub_cycling = true
-    output_sub_cycles = true
+    # sub_cycling = true
+    # output_sub_cycles = true
+    catch_up = true
     use_displaced_mesh = true
   [../]
   [./Fluid]
@@ -18,6 +19,7 @@
     input_files = subapps/fluid.i
     positions = '0.0 0.0 0.0'
     execute_on = 'timestep_end'
+    catch_up = true
     use_displaced_mesh = true
   [../]
 []
@@ -32,6 +34,7 @@
     source_variable = disp_x
     variable = solid_bc_store_x
     execute_on = 'timestep_begin'
+    use_displaced_mesh = true
   [../]
   [./take_disp_from_solid_y]
     type = MultiAppInterpolationTransfer
@@ -40,6 +43,7 @@
     source_variable = disp_y
     variable = solid_bc_store_y
     execute_on = 'timestep_begin'
+    use_displaced_mesh = true
   [../]
 
   # Regularize fluid mesh and export displacements to fluid subapp
@@ -50,6 +54,7 @@
     source_variable = mesh_disp_x
     variable = disp_x
     execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
   [./send_mesh_disp_to_fluid_y]
     type = MultiAppCopyTransfer
@@ -58,6 +63,7 @@
     source_variable = mesh_disp_y
     variable = disp_y
     execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
 
   # Solve the fluid tractions along boundary, send from fluid to solid
@@ -67,8 +73,8 @@
     multi_app = Fluid
     # source_variable = fluid_bc_store_x
     # variable = fluid_traction_x
-    source_variable = fluid_traction_x
-    variable = fluid_bc_store_x
+    source_variable = sigma_x
+    variable = sigma_x
     execute_on = 'timestep_end'
     use_displaced_mesh = true
   [../]
@@ -78,25 +84,28 @@
     multi_app = Fluid
     # source_variable = fluid_bc_store_y
     # variable = fluid_traction_y
-    source_variable = fluid_traction_y
-    variable = fluid_bc_store_y
+    source_variable = sigma_y
+    variable = sigma_y
     execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
   [./send_traction_to_solid_x]
     type = MultiAppInterpolationTransfer
     direction = to_multiapp
     multi_app = Solid
-    source_variable = fluid_bc_store_x
+    source_variable = sigma_x
     variable = sigma_x
     execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
   [./send_traction_to_solid_y]
     type = MultiAppInterpolationTransfer
     direction = to_multiapp
     multi_app = Solid
-    source_variable = fluid_bc_store_y
+    source_variable = sigma_y
     variable = sigma_y
     execute_on = 'timestep_end'
+    use_displaced_mesh = true
   [../]
 []
 
@@ -141,11 +150,11 @@
     family = LAGRANGE
     order = SECOND
   [../]
-  [./fluid_bc_store_x]
+  [./sigma_x]
     family = MONOMIAL
     order = CONSTANT
   [../]
-  [./fluid_bc_store_y]
+  [./sigma_y]
     family = MONOMIAL
     order = CONSTANT
   [../]

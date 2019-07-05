@@ -72,11 +72,11 @@
   [../]
 
   # These are the boundary-only versions of the fluid stresses above
-  [./fluid_traction_x]
+  [./sigma_x]
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./fluid_traction_y]
+  [./sigma_y]
     order = CONSTANT
     family = MONOMIAL
   [../]
@@ -90,6 +90,7 @@
 
 # All the terms in the weak form that need to be solved in this simulation
 [Kernels]
+  use_displaced_mesh = true
   # Need to build the Navier-Stokes equations using Moose kernels. By the end,
   # we should have the following terms in the equations:
   #
@@ -150,14 +151,14 @@
   [./fluid_traction_x]
     type = CoupledAux
     coupled = fluid_stress_x
-    variable = fluid_traction_x
+    variable = sigma_x
     boundary = 'dam_left dam_top dam_right'
     use_displaced_mesh = true
   [../]
   [./fluid_traction_y]
     type = CoupledAux
     coupled = fluid_stress_y
-    variable = fluid_traction_y
+    variable = sigma_y
     boundary = 'dam_left dam_top dam_right'
     use_displaced_mesh = true
   [../]
@@ -176,25 +177,30 @@
     variable = vel_x
     boundary = 'inlet'
     # value = 0.0 #1e0
-    function = '10 * (-exp(-1e3 *t) + 1)'
+    # function = '100 * (-exp(-1e3 *t) + 1)'
+    function = '10'
+    use_displaced_mesh = true
   [../]
   [./outlet]
     type = DirichletBC
     variable = pressure
     boundary = 'outlet'
     value = 0.0
+    use_displaced_mesh = true
   [../]
   [./x_noslip]
     type = DirichletBC
     variable = vel_x
     boundary = 'no_slip dam_left dam_top dam_right'
     value = 0.0
+    use_displaced_mesh = true
   [../]
   [./y_noslip]
     type = DirichletBC
     variable = vel_y
     boundary = 'no_slip dam_left dam_top dam_right'
     value = 0.0
+    use_displaced_mesh = true
   [../]
 []
 
@@ -225,7 +231,7 @@
   dt = 1e-5
 
   # PETSc solver options
-  petsc_options = '-snes_converged_reason -ksp_converged_reason'
+  # petsc_options = '-snes_converged_reason -ksp_converged_reason'
   petsc_options_iname = '-pc_type -pc_factor_mat_solver_package '
   petsc_options_value = 'lu       superlu_dist'
 []

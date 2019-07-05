@@ -4,7 +4,7 @@ Mesh.SecondOrderLinear = 0;
 
 
 // Define point parameters
-sizing = 0.003;
+sizing = 0.001;
 
 // Build points
 Point(1) = {0,0,0, sizing};

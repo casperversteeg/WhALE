@@ -190,7 +190,7 @@
   dt = 1e-5
 
   # PETSc solver options
-  petsc_options = '-snes_converged_reason -ksp_converged_reason'
+  # petsc_options = '-snes_converged_reason -ksp_converged_reason'
   petsc_options_iname = '-pc_type -pc_factor_mat_solver_package '
   petsc_options_value = 'lu       superlu_dist'
 []
