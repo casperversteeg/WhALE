@@ -246,5 +246,3 @@
   interval = 1
   print_linear_residuals = true
 []
-
-# SEE IF WE CAN FIX THIS WITH CONTROLS BECAUSE THIS IS SOME BULLSHIT

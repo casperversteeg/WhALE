@@ -178,7 +178,7 @@
     boundary = 'inlet'
     # value = 0.0 #1e0
     # function = '100 * (-exp(-1e3 *t) + 1)'
-    function = '100'
+    function = '0' #'100'
     use_displaced_mesh = true
   [../]
   [./outlet]
