@@ -248,6 +248,6 @@
 # Output files for viewing after model finishes
 [Outputs]
   interval = 1
-  print_linear_residuals = true
+  print_linear_residuals = false
   perf_graph = true
 []

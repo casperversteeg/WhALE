@@ -154,13 +154,13 @@
     aux_variable = sigma_y
     use_displaced_mesh = true
   [../]
-  [./pressure]
-    type = Pressure
-    boundary = 'left'
-    function = '1e4'
-    component = 0
-    variable = disp_x
-  [../]
+  # [./pressure]
+  #   type = Pressure
+  #   boundary = 'left'
+  #   function = '1e4'
+  #   component = 0
+  #   variable = disp_x
+  # [../]
 []
 
 # Define postprocessor operations that can be used for viewing data/statistics

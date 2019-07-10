@@ -225,7 +225,7 @@
     boundary = 'inlet'
     # value = 0.0 #1e0
     # function = '100 * (-exp(-1e3 *t) + 1)'
-    function = '0' #'100'
+    function = '100'
     use_displaced_mesh = true
   [../]
   [./outlet]
@@ -271,7 +271,6 @@
     type = INSExplicitTimestepSelector
     beta = 1
     vel_mag = norm_u
-
   [../]
 []
 
@@ -321,6 +320,6 @@
   [./console]
     type = Console
     execute_postprocessors_on = none
-    max_rows = 2
+    # max_rows = 2
   [../]
 []
