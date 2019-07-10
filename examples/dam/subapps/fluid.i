@@ -81,10 +81,29 @@
     family = MONOMIAL
   [../]
 
+  [./sigma_x_INS]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./sigma_y_INS]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+
   # Just to observe the quality of the fluid mesh:
   [./mesh_quality]
     family = MONOMIAL
     order = CONSTANT
+  [../]
+  # Compute Courant number for time-integrator stability
+  [./Courant_number]
+    family = MONOMIAL
+    order = CONSTANT
+  [../]
+  # Compute velocity magnitude at every point
+  [./norm_u]
+    family = LAGRANGE
+    order = SECOND
   [../]
 []
 
@@ -163,10 +182,38 @@
     use_displaced_mesh = true
   [../]
 
+  [./fluid_traction_x_INS]
+    type = INSStressComponentAux
+    variable = sigma_x_INS
+    boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
+    comp = 0
+  [../]
+  [./fluid_traction_y_INS]
+    type = INSStressComponentAux
+    variable = sigma_y_INS
+    boundary = 'dam_left dam_top dam_right'
+    use_displaced_mesh = true
+    comp = 1
+  [../]
+
+
   [./mesh_quality]
     type = ElementQualityAux
     variable = mesh_quality
     metric = DISTORTION
+  [../]
+  [./Courant_number]
+    type = INSCourant
+    variable = Courant_number
+    use_displaced_mesh = true
+  [../]
+  [./velocity_magnitude]
+    type = VectorMagnitudeAux
+    variable = norm_u
+    x = vel_x
+    y = vel_y
+    use_displaced_mesh = true
   [../]
 []
 
@@ -206,6 +253,25 @@
 
 # Define postprocessor operations that can be used for viewing data/statistics
 [Postprocessors]
+  [./TractionChecker_x]
+    type = ElementL2Difference
+    variable = sigma_x
+    other_variable = sigma_x_INS
+    use_displaced_mesh = true
+  [../]
+  [./TractionChecker_y]
+    type = ElementL2Difference
+    variable = sigma_y
+    other_variable = sigma_y_INS
+    use_displaced_mesh = true
+  [../]
+
+  # Postprocess for optimal timestep based on Courant number
+  [./Timestep_from_Courant]
+    type = INSExplicitTimestepSelector
+    beta = 1
+    vel_mag = norm_u
+  [../]
 []
 
 # Set up matrix preconditioner to improve convergence
@@ -218,6 +284,11 @@
 
 # Type of algorithm and convergence parameters used to solve the matrix problem
 [Executioner]
+  [./Time_stepper]
+    type = PostprocessorDT
+    postprocessor = Timestep_from_Courant
+    dt = 1e-5
+  [../]
   # Set solver to transient, with Newton-Raphson nonlinear solver
   type = Transient
   solve_type = NEWTON
