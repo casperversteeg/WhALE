@@ -12,6 +12,7 @@
     # output_sub_cycles = true
     catch_up = true
     use_displaced_mesh = true
+    implicit = false
   [../]
   [./Fluid]
     type = TransientMultiApp
@@ -19,8 +20,11 @@
     input_files = subapps/fluid.i
     positions = '0.0 0.0 0.0'
     execute_on = 'timestep_end'
-    catch_up = true
+    sub_cycling = true
+    output_sub_cycles = true
+    # catch_up = true
     use_displaced_mesh = true
+    implicit = false
   [../]
 []
 
@@ -245,4 +249,5 @@
 [Outputs]
   interval = 1
   print_linear_residuals = true
+  perf_graph = true
 []

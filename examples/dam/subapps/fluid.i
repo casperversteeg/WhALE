@@ -109,7 +109,7 @@
 
 # All the terms in the weak form that need to be solved in this simulation
 [Kernels]
-  use_displaced_mesh = true
+  # use_displaced_mesh = true
   # Need to build the Navier-Stokes equations using Moose kernels. By the end,
   # we should have the following terms in the equations:
   #
@@ -271,6 +271,7 @@
     type = INSExplicitTimestepSelector
     beta = 1
     vel_mag = norm_u
+
   [../]
 []
 
@@ -284,7 +285,7 @@
 
 # Type of algorithm and convergence parameters used to solve the matrix problem
 [Executioner]
-  [./Time_stepper]
+  [./TimeStepper]
     type = PostprocessorDT
     postprocessor = Timestep_from_Courant
     dt = 1e-5
@@ -316,5 +317,10 @@
     type = Exodus
     # Set output folder and filename
     file_base = output/fluid
+  [../]
+  [./console]
+    type = Console
+    execute_postprocessors_on = none
+    max_rows = 2
   [../]
 []
