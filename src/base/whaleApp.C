@@ -27,6 +27,10 @@ whaleApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
   Registry::registerActionsTo(af, {"whaleApp"});
 
   /* register custom execute flags, action syntax, etc. here */
+
+  registerSyntax("FluidStructureInterAction", "FSI");
+  registerSyntax("FSIFluidAction", "FSI/Fluid/*");
+  registerSyntax("FSISolidAction", "FSI/Solid/*");
 }
 
 void
