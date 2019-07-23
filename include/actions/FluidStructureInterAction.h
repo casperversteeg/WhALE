@@ -12,7 +12,7 @@ class FluidStructureInterAction : public Action
 public:
   FluidStructureInterAction(const InputParameters & params);
 
-  // virtual void act();
+  virtual void act() override{};
 
 protected:
   const bool _use_ad;

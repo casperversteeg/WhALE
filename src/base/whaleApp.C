@@ -1,6 +1,7 @@
 #include "whaleApp.h"
 #include "Moose.h"
 #include "AppFactory.h"
+#include "ActionFactory.h"
 #include "ModulesApp.h"
 #include "MooseSyntax.h"
 
@@ -9,6 +10,7 @@ InputParameters
 validParams<whaleApp>()
 {
   InputParameters params = validParams<MooseApp>();
+  params.set<bool>("automatic_automatic_scaling") = false;
   return params;
 }
 
@@ -19,18 +21,26 @@ whaleApp::whaleApp(InputParameters parameters) : MooseApp(parameters)
 
 whaleApp::~whaleApp() {}
 
+static void
+associateSyntaxInner(Syntax & syntax, ActionFactory & /*action_factory*/)
+{
+  /* register custom execute flags, action syntax, etc. here */
+
+  registerSyntax("FluidStructureInterAction", "FSI");
+  registerSyntax("FSIFluidAction", "FSI/Fluid/*");
+  registerSyntax("FSISolidAction", "FSI/Solid/*");
+
+  registerTask("get_blocks_from_mesh", /*is_required=*/false);
+  registerTask("apply_var_to_blocks", /*is_required=*/false);
+}
+
 void
 whaleApp::registerAll(Factory & f, ActionFactory & af, Syntax & s)
 {
   ModulesApp::registerAll(f, af, s);
   Registry::registerObjectsTo(f, {"whaleApp"});
   Registry::registerActionsTo(af, {"whaleApp"});
-
-  /* register custom execute flags, action syntax, etc. here */
-
-  registerSyntax("FluidStructureInterAction", "FSI");
-  registerSyntax("FSIFluidAction", "FSI/Fluid/*");
-  registerSyntax("FSISolidAction", "FSI/Solid/*");
+  associateSyntaxInner(s, af);
 }
 
 void
