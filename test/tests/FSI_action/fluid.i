@@ -1,12 +1,3 @@
-[GlobalParams]
-  gravity = '0 0 0'
-  integrate_p_by_parts = false
-  laplace = true
-  convective_term = true
-  transient_term = false
-  pspg = false
-[]
-
 [Mesh]
   type = GeneratedMesh
   dim = 2
@@ -18,12 +9,13 @@
 [Materials]
   [const]
     type = GenericConstantMaterial
+    # block = 0
     prop_names = 'rho mu'
     prop_values = '1  1'
   []
 []
 
-[Variables]
+# [Variables]
 #   [vel_x]
 #     family = LAGRANGE
 #     order = SECOND
@@ -36,7 +28,7 @@
 #     family = LAGRANGE
 #     order = FIRST
 #   []
-[]
+# []
 #
 # [Kernels]
 #   # Enforce incompressible continuity with INSMass, which adds div(velocity) to residual
@@ -68,10 +60,11 @@
 
 [FSI]
   [Fluid]
-    [./1]
-      pressure = 'pressure'
+    [1]
       velocities = 'vel_x vel_y'
+      pressure = 'pressure'
       add_variables = true
+      block = 0
     []
   []
 []
@@ -112,24 +105,18 @@
 
 [Executioner]
   type = Steady
-  # type = Transient
-  # [./TimeIntegrator]
-  #   type = NewmarkBeta
-  #   beta = 0.25
-  #   gamma = 0.5
-  # [../]
-  # dt = 1e-4
 
   nl_rel_tol = 1e-10
   nl_abs_tol = 1e-7
   nl_max_its = 15
   l_tol = 1e-6
   l_max_its = 300
-  # end_time = 5e-3
 
   solve_type = 'PJFNK'
-  petsc_options_iname = '-pc_type'
-  petsc_options_value = 'lu'
+  petsc_options_iname = '-ksp_gmres_restart -pc_type -sub_pc_type -sub_pc_factor_levels'
+  petsc_options_value = '300                bjacobi  ilu          4'
+  # petsc_options_iname = '-pc_type'
+  # petsc_options_value = 'lu'
   line_search = none
 []
 

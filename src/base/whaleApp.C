@@ -1,7 +1,7 @@
 #include "whaleApp.h"
 #include "Moose.h"
 #include "AppFactory.h"
-#include "ActionFactory.h"
+// #include "ActionFactory.h"
 #include "ModulesApp.h"
 #include "MooseSyntax.h"
 
@@ -10,7 +10,7 @@ InputParameters
 validParams<whaleApp>()
 {
   InputParameters params = validParams<MooseApp>();
-  params.set<bool>("automatic_automatic_scaling") = false;
+  // params.set<bool>("automatic_automatic_scaling") = false;
   return params;
 }
 
@@ -26,12 +26,18 @@ associateSyntaxInner(Syntax & syntax, ActionFactory & /*action_factory*/)
 {
   /* register custom execute flags, action syntax, etc. here */
 
-  registerSyntax("FluidStructureInterAction", "FSI");
+  registerSyntax("EmptyAction", "FSI");
+  registerSyntax("CommonFSIAction", "FSI/*");
+
+  registerSyntax("EmptyAction", "FSI/Fluid");
   registerSyntax("FSIFluidAction", "FSI/Fluid/*");
+
+  registerSyntax("EmptyAction", "FSI/Solid");
   registerSyntax("FSISolidAction", "FSI/Solid/*");
 
   registerTask("get_blocks_from_mesh", /*is_required=*/false);
   registerTask("apply_var_to_blocks", /*is_required=*/false);
+  addTaskDependency("apply_var_to_blocks", "create_problem_complete");
 }
 
 void

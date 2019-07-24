@@ -1,0 +1,28 @@
+[Tests]
+  [./4x4]
+    type = 'Exodiff'
+    input = 'INS_vanilla_convergence.i'
+    exodiff = '4x4.e'
+    cli_args = 'Outputs/file_base=4x4 Mesh/nx=4 Mesh/ny=4'
+  [../]
+  [./8x8]
+    type = 'Exodiff'
+    input = 'INS_vanilla_convergence.i'
+    exodiff = '8x8.e'
+    cli_args = 'Outputs/file_base=8x8 Mesh/nx=8 Mesh/ny=8'
+  [../]
+  [./16x16]
+    type = 'Exodiff'
+    input = 'INS_vanilla_convergence.i'
+    exodiff = '16x16.e'
+    cli_args = 'Outputs/file_base=16x16 Mesh/nx=16 Mesh/ny=16'
+    heavy = true
+  [../]
+  [./32x32]
+    type = 'Exodiff'
+    input = 'INS_vanilla_convergence.i'
+    exodiff = '32x32.e'
+    cli_args = 'Outputs/file_base=32x32 Mesh/nx=32 Mesh/ny=32'
+    heavy = true
+  [../]
+[]

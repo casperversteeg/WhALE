@@ -1,16 +1,13 @@
 # Pretty much entirely lifted this from the Navier-Stokes App testing routines
-mu=1.5e-2
-rho=2.5
+mu=1
+rho=1
 
 [GlobalParams]
-  supg = true
-  pspg = true
-  integrate_p_by_parts = true
-  laplace = false
+  integrate_p_by_parts = false
+  laplace = true
   u = vel_x
   v = vel_y
   p = p
-  alpha = 1
   order = SECOND
   family = LAGRANGE
   mesh_x = disp_x

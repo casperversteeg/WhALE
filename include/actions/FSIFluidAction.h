@@ -1,18 +1,18 @@
 #pragma once
 
-#include "FluidStructureInterAction.h"
+#include "FSIActionBase.h"
 
 class FSIFluidAction;
 
 template <>
 InputParameters validParams<FSIFluidAction>();
 
-class FSIFluidAction : public FluidStructureInterAction
+class FSIFluidAction : public FSIActionBase
 {
 public:
   FSIFluidAction(const InputParameters & params);
 
-  virtual void act();
+  virtual void act() override;
 
 protected:
   // Perform checks on the domain and make sure subdomains and variables are applied consistently
