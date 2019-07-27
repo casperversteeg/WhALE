@@ -19,6 +19,8 @@ protected:
   void checkBlocks();
   void checkSubdomainAndVariableConsistency();
 
+  InputParameters getKernelParameters(std::string type);
+
   // Velocity variables
   std::vector<VariableName> _velocities;
   unsigned int _nvel;
@@ -36,6 +38,12 @@ protected:
 
   // flag whether to use INS kernels
   // bool _compressible;
+  // which FSI formulation to use, i.e. ALE, immersed, etc...
+  // enum class FSIFormulation
+  // {
+  //   ALE,
+  //   Immersed
+  // } _fsi_formulation;
 
   bool _use_displaced_mesh;
   // Can add some methods that mess with MooseMesh type of stuff that checks if the element order is

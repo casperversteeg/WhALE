@@ -23,5 +23,6 @@ public:
   // ///@}
 
 protected:
+  const bool _is_transient;
   const bool _use_ad;
 };

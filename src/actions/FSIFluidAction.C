@@ -46,6 +46,13 @@ validParams<FSIFluidAction>()
                                                       "The list of ids of the blocks (subdomain) "
                                                       "that should be designated as fluid domain");
 
+  // ***** Optional parameters *****
+  // params.addParam<bool>(
+  //     "compressible",
+  //     false,
+  //     "Whether to use compressible kernels for Navier-Stokes problem. Default is
+  //     incompressible.");
+
   // ***** Output *****
   // params.addParam<MultiMooseEnum>("additional_generate_output",
   //                                 /*some output types in MultiMooseEnum or something*/,
@@ -65,7 +72,9 @@ FSIFluidAction::FSIFluidAction(const InputParameters & params)
     _pressure(getParam<VariableName>("pressure")),
     _subdomain_names(getParam<std::vector<SubdomainName>>("block")),
     _subdomain_ids(),
+    // _compressible(getParam<bool>("compressible")),
     // Parameters defined in the parent class that should be set in this one
+    // _fsi_formulation(getParam<MooseEnum>("fsi_formulation").getEnum<FSIFormulation>()),
     _use_displaced_mesh(getParam<bool>("use_displaced_mesh"))
 {
 }
@@ -121,20 +130,10 @@ FSIFluidAction::act()
   // ***** Add appropriate Navier-Stokes kernels *****
   else if (_current_task == "add_kernel")
   {
-    // Get valid parameters for a Navier-Stokes kernel of this type
-    InputParameters params = _factory.getValidParams("INSMomentumTractionForm");
-    // From the parameters set in this Action, set all the ones that are common between them, with
-    // the exception of whatever is in the second argument
-    params.applyParameters(parameters(), {"u", "v", /*"w",*/ "p", "use_displaced_mesh"});
-    // Set parameters for Navier-Stokes kernel, where inputs should be vectors
-    params.set<std::vector<VariableName>>("u") = {_velocities[0]};
-    params.set<std::vector<VariableName>>("v") = {_velocities[1]};
-    // params.set<VariableName>("w") = _velocities[0];
-    params.set<std::vector<VariableName>>("p") = {_pressure};
-    params.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
-
     for (unsigned int i = 0; i < _nvel; ++i)
     {
+      // Get valid parameters for a Navier-Stokes kernel of this type
+      auto params = getKernelParameters("INSMomentumTractionForm");
       // for each velocity component, add an INSMomentumTractionForm kernel
       std::string kernel_name = "FSIFluid_" + name() + Moose::stringify(i);
       // INSMomentumTractionForm must have a primary variable with associated component
@@ -144,17 +143,18 @@ FSIFluidAction::act()
       // if we're using AD, will need to change how we add the kernel, but not currently doing that,
       // so hurray
       _problem->addKernel("INSMomentumTractionForm", kernel_name, params);
+
+      // If the problem is transient, also add the respective TimeDerivative terms:
+      if (_is_transient)
+      {
+        auto params_t = getKernelParameters("INSMomentumTimeDerivative");
+        params_t.set<NonlinearVariableName>("variable") = _velocities[i];
+        kernel_name = "FSIFluid_" + name() + "_unsteady_" + Moose::stringify(i);
+        _problem->addKernel("INSMomentumTimeDerivative", kernel_name, params_t);
+      }
     }
-
-    InputParameters params_p = _factory.getValidParams("INSMass");
-    params_p.applyParameters(parameters(), {"u", "v", /*"w",*/ "p", "use_displaced_mesh"});
+    auto params_p = getKernelParameters("INSMass");
     params_p.set<NonlinearVariableName>("variable") = _pressure;
-    params_p.set<std::vector<VariableName>>("u") = {_velocities[0]};
-    params_p.set<std::vector<VariableName>>("v") = {_velocities[1]};
-    // params.set<VariableName>("w") = _velocities[0];
-    params_p.set<std::vector<VariableName>>("p") = {_pressure};
-    params_p.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
-
     _problem->addKernel("INSMass", "FSIFluid_Mass", params_p);
   }
 }
@@ -212,15 +212,21 @@ FSIFluidAction::checkSubdomainAndVariableConsistency()
   }
 }
 
-// InputParameters
-// TensorMechanicsAction::getKernelParameters(std::string type)
-// {
-//   InputParameters params = _factory.getValidParams(type);
-//   params.applyParameters(parameters(),
-//                          {"displacements", "use_displaced_mesh", "save_in", "diag_save_in"});
-//
-//   params.set<std::vector<VariableName>>("displacements") = _coupled_displacements;
-//   params.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
-//
-//   return params;
-// }
+InputParameters
+FSIFluidAction::getKernelParameters(std::string type)
+{
+  InputParameters params = _factory.getValidParams(type);
+  params.applyParameters(parameters(), {"use_displaced_mesh"});
+  if (type != "INSMomentumTimeDerivative")
+  {
+    std::vector<std::string> v_comp = {"u", "v", "w"};
+
+    for (unsigned i = 0; i < _nvel; ++i)
+    {
+      params.set<std::vector<VariableName>>(v_comp[i]) = {_velocities[i]};
+    }
+    params.set<std::vector<VariableName>>("p") = {_pressure};
+    params.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
+  }
+  return params;
+}

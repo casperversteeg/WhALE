@@ -1,0 +1,34 @@
+[Tests]
+  [./INS_consistency_steady]
+    type = 'Exodiff'
+    input = 'FSI_fluid_steady.i'
+    cli_args = 'Outputs/file_base=INS_steady'
+    exodiff = 'INS_steady.e'
+
+    requirement = "The FSI/Fluid action shall build the correct set of INS kernels for a steady problem."
+  [../]
+  [./INS_consistency_transient]
+    type = 'Exodiff'
+    input = 'FSI_fluid_transient.i'
+    cli_args = 'Outputs/file_base=INS_transient'
+    exodiff = 'INS_transient.e'
+
+    requirement = "The FSI/Fluid action shall build the correct set of INS kernels for a transient problem."
+  [../]
+  [./FSIFluidSteady]
+    type = 'Exodiff'
+    input = 'FSI_fluid_steady.i'
+    exodiff = 'FSI_fluid_steady.e'
+    cli_args = 'Outputs/file_base=FSI_fluid_steady'
+
+    prereq = "INS_consistency_steady"
+  [../]
+  [./FSIFluidTransient]
+    type = 'Exodiff'
+    input = 'FSI_fluid_transient.i'
+    exodiff = 'FSI_fluid_transient.e'
+    cli_args = 'Outputs/file_base=FSI_fluid_transient'
+
+    prereq = "INS_consistency_transient"
+  [../]
+[]

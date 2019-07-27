@@ -9,54 +9,10 @@
 [Materials]
   [const]
     type = GenericConstantMaterial
-    # block = 0
     prop_names = 'rho mu'
     prop_values = '1  1'
   []
 []
-
-# [Variables]
-#   [vel_x]
-#     family = LAGRANGE
-#     order = SECOND
-#   []
-#   [vel_y]
-#     family = LAGRANGE
-#     order = SECOND
-#   []
-#   [pressure]
-#     family = LAGRANGE
-#     order = FIRST
-#   []
-# []
-#
-# [Kernels]
-#   # Enforce incompressible continuity with INSMass, which adds div(velocity) to residual
-#   [mass]
-#     type = INSMass
-#     variable = pressure
-#     u = vel_x
-#     v = vel_y
-#     p = pressure
-#   []
-#   # Momentum equation residuals u dot grad(u)
-#   [convection_x]
-#     type = INSMomentumTractionForm
-#     variable = vel_x
-#     component = 0
-#     u = vel_x
-#     v = vel_y
-#     p = pressure
-#   []
-#   [convection_y]
-#     type = INSMomentumTractionForm
-#     variable = vel_y
-#     component = 1
-#     u = vel_x
-#     v = vel_y
-#     p = pressure
-#   []
-# []
 
 [FSI]
   [Fluid]
@@ -106,25 +62,15 @@
 [Executioner]
   type = Steady
 
-  nl_rel_tol = 1e-10
-  nl_abs_tol = 1e-7
-  nl_max_its = 15
-  l_tol = 1e-6
-  l_max_its = 300
+  nl_abs_tol = 1e-8
 
   solve_type = 'PJFNK'
   petsc_options_iname = '-ksp_gmres_restart -pc_type -sub_pc_type -sub_pc_factor_levels'
   petsc_options_value = '300                bjacobi  ilu          4'
-  # petsc_options_iname = '-pc_type'
-  # petsc_options_value = 'lu'
-  line_search = none
 []
 
 [Outputs]
   print_linear_residuals = false
-  execute_on = 'timestep_end'
-  # xda = true
-  [out]
-    type = Exodus
-  []
+  exodus = true
+  file_base = "FSI_fluid_steady"
 []

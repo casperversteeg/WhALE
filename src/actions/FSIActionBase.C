@@ -16,16 +16,26 @@ validParams<FSIActionBase>()
 
   // Document class
   params.addClassDescription(
-      "Base class that gathers inputs applied to both Fluid and Solid problem domains");
+      "Base class that gathers inputs applied to both Fluid and Solid problem domains.");
 
   // ***** None of these parameters are required, but will be available to children of this class,
   // FSIFluidAction and FSISolidAction *****
 
+  // Use transient formulation?
+  params.addParam<bool>(
+      "transient", false, "Whether to include transient (i.e. time derivative) kernels.");
   // Use displaced mesh across all kernels?
   params.addParam<bool>(
-      "use_displaced_mesh", false, "Whether to use displaced mesh in the kernels");
+      "use_displaced_mesh", false, "Whether to use displaced mesh in the kernels.");
   // Add variables and forego [Variables] declaration block?
-  params.addParam<bool>("add_variables", false, "Add the nonlinear variables");
+  params.addParam<bool>("add_variables", false, "Add the nonlinear variables.");
+
+  // Create parameter enum that can be used to set the enum variable declared in the class
+  // MooseEnum fsiFormulationType("", "");
+  // Which type of FSI formulation dictates which kernels should be added
+  // params.addParam<MooseEnum>(
+  //     "fsi_formulation", fsiFormulationType, "What type of FSI formulation to use");
+  // params.addParamNamesToGroup("FSI_formulation", "Advanced");
 
   // ***** Output *****
   // params.addParam<MultiMooseEnum>("generate_output",
@@ -45,7 +55,9 @@ validParams<FSIActionBase>()
 // ***** Constructor for this base class *****
 // Build "Action" class with constructor parameters for this class
 FSIActionBase::FSIActionBase(const InputParameters & parameters)
-  : Action(parameters), _use_ad(false /*getParam<bool>("use_automatic_differentiation")*/)
+  : Action(parameters),
+    _is_transient(getParam<bool>("transient")),
+    _use_ad(false /*getParam<bool>("use_automatic_differentiation")*/)
 {
   // ***** This class is the foundation for FSIFluid and FSISolid classes, which ought to be nested
   // in a [FSI] block, which itself may contain parameter settings. These settings in the [FSI]
