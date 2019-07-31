@@ -190,7 +190,7 @@ void
 FSIFluidAction::checkSubdomainAndVariableConsistency()
 {
   //
-  // Gather info about all other master actions when we add variables
+  // Gather info about all other fluid actions when we add variables
   //
   if (_current_task == "apply_var_to_blocks" && getParam<bool>("add_variables"))
   {
@@ -207,7 +207,7 @@ FSIFluidAction::checkSubdomainAndVariableConsistency()
 
       if (added_size == 0 && other_FSIfluid_actions.size() > 1)
         mooseError(
-            "If more than one fluid domain is defined, they must be restricted by mesh block.");
+            "If more than one fluid action is defined, all must be restricted by mesh block.");
     }
   }
 }
@@ -217,6 +217,7 @@ FSIFluidAction::getKernelParameters(std::string type)
 {
   InputParameters params = _factory.getValidParams(type);
   params.applyParameters(parameters(), {"use_displaced_mesh"});
+  params.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
   if (type != "INSMomentumTimeDerivative")
   {
     std::vector<std::string> v_comp = {"u", "v", "w"};
@@ -226,7 +227,6 @@ FSIFluidAction::getKernelParameters(std::string type)
       params.set<std::vector<VariableName>>(v_comp[i]) = {_velocities[i]};
     }
     params.set<std::vector<VariableName>>("p") = {_pressure};
-    params.set<bool>("use_displaced_mesh") = _use_displaced_mesh;
   }
   return params;
 }

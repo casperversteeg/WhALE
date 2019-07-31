@@ -393,6 +393,7 @@
  /home/casperversteeg/MOOSE/whale/build/header_symlinks/FSIFluidAction.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/string_to_enum.h \
  /home/casperversteeg/MOOSE/whale/src/actions/FSISolidAction.C \
+ /home/casperversteeg/MOOSE/whale/build/header_symlinks/FSISolidAction.h \
  /home/casperversteeg/MOOSE/whale/src/actions/FSInterfaceAction.C
 
 /home/casperversteeg/MOOSE/whale/src/actions/CommonFSIAction.C:
@@ -1180,5 +1181,7 @@
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/string_to_enum.h:
 
 /home/casperversteeg/MOOSE/whale/src/actions/FSISolidAction.C:
+
+/home/casperversteeg/MOOSE/whale/build/header_symlinks/FSISolidAction.h:
 
 /home/casperversteeg/MOOSE/whale/src/actions/FSInterfaceAction.C:

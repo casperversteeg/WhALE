@@ -31,11 +31,11 @@ validParams<FSIActionBase>()
   params.addParam<bool>("add_variables", false, "Add the nonlinear variables.");
 
   // Create parameter enum that can be used to set the enum variable declared in the class
-  // MooseEnum fsiFormulationType("", "");
+  MultiMooseEnum fsiFormulationType("ALE", "ALE", false);
   // Which type of FSI formulation dictates which kernels should be added
-  // params.addParam<MooseEnum>(
-  //     "fsi_formulation", fsiFormulationType, "What type of FSI formulation to use");
-  // params.addParamNamesToGroup("FSI_formulation", "Advanced");
+  params.addParam<MultiMooseEnum>(
+      "FSI_formulation", fsiFormulationType, "What type of FSI formulation to use");
+  params.addParamNamesToGroup("FSI_formulation", "Advanced");
 
   // ***** Output *****
   // params.addParam<MultiMooseEnum>("generate_output",
@@ -56,6 +56,7 @@ validParams<FSIActionBase>()
 // Build "Action" class with constructor parameters for this class
 FSIActionBase::FSIActionBase(const InputParameters & parameters)
   : Action(parameters),
+    _fsi_formulation(getParam<MultiMooseEnum>("FSI_formulation")),
     _is_transient(getParam<bool>("transient")),
     _use_ad(false /*getParam<bool>("use_automatic_differentiation")*/)
 {
@@ -74,6 +75,14 @@ FSIActionBase::FSIActionBase(const InputParameters & parameters)
     _pars.applyParameters(parent_action[0]->parameters());
   }
 
+  // Need to make sure that the transient formulation is consistent between all sub-blocks. Throw an
+  // error if the _is_transient variable does not match between actions
+  auto other_FSI_actions = _awh.getActions<FSIActionBase>();
+  for (const auto & action : other_FSI_actions)
+  {
+    mooseAssert(_is_transient == action->_is_transient,
+                "Inconsistent transient formulation between " + name() + " and " + action->name());
+  }
   // the generate_output parameter can be amended with additional_generate_output from any child
   // classes. Can do that here.
   // if (isParamValid("additional_generate_output"))

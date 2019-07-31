@@ -28,6 +28,8 @@
       strain = SMALL
       add_variables = true
       transient = true
+      beta = 0.3025
+      gamma = 0.6
       block = 0
     []
   []

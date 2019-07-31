@@ -1,7 +1,3 @@
-[GlobalParams]
-  displacements = 'disp_x disp_y'
-[]
-
 [Mesh]
   type = GeneratedMesh
   dim = 2
@@ -9,17 +5,13 @@
   ny = 10
 []
 
-[Variables]
-  [disp_x]
-  []
-  [disp_y]
-  []
-[]
-
 [Modules/TensorMechanics/Master]
-  [solid_domain]
-    strain = SMALL
-    add_variables = true
+  displacements = 'disp_x disp_y'
+  add_variables = true
+  strain = SMALL
+  [1]
+    displacements = 'disp_x disp_y'
+    block = 0
   []
 []
 

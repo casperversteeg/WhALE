@@ -1,19 +1,8 @@
-[GlobalParams]
-  displacements = 'disp_x disp_y'
-[]
-
 [Mesh]
   type = GeneratedMesh
   dim = 2
   nx = 10
   ny = 10
-[]
-
-[Variables]
-  [disp_x]
-  []
-  [disp_y]
-  []
 []
 
 [AuxVariables]
@@ -34,14 +23,14 @@
     displacement = disp_x
     velocity = vel_x
     beta = 0.3025
-    execute_on = timestep_end
+    # execute_on = timestep_end
   [../]
   [./vel_x]
     type = NewmarkVelAux
     variable = vel_x
     acceleration = accel_x
     gamma = 0.6
-    execute_on = timestep_end
+    # execute_on = timestep_end
   [../]
   [./accel_y]
     type = NewmarkAccelAux
@@ -49,21 +38,24 @@
     displacement = disp_y
     velocity = vel_y
     beta = 0.3025
-    execute_on = timestep_end
+    # execute_on = timestep_end
   [../]
   [./vel_y]
     type = NewmarkVelAux
     variable = vel_y
     acceleration = accel_y
     gamma = 0.6
-    execute_on = timestep_end
+    # execute_on = timestep_end
   [../]
 []
 
 [Modules/TensorMechanics/Master]
-  [solid_domain]
-    strain = SMALL
-    add_variables = true
+  displacements = 'disp_x disp_y'
+  add_variables = true
+  strain = SMALL
+  [1]
+    displacements = 'disp_x disp_y'
+    block = 0
   []
 []
 

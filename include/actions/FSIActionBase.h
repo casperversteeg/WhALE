@@ -23,6 +23,9 @@ public:
   // ///@}
 
 protected:
+  // FSI formulation
+  MultiMooseEnum _fsi_formulation;
+
   const bool _is_transient;
   const bool _use_ad;
 };
