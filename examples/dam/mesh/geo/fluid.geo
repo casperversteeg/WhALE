@@ -9,8 +9,8 @@ sizing = 0.001;
 // Build points
 Point(1) = {0,0,0, sizing};
 Point(2) = {0.0495,0,0, sizing};
-Point(3) = {0.0495,0.0195,0, sizing};
-Point(4) = {0.0505,0.0195,0, sizing};
+Point(3) = {0.0495,0.01,0, sizing};
+Point(4) = {0.0505,0.01,0, sizing};
 Point(5) = {0.0505,0,0, sizing};
 Point(6) = {0.1,0,0, sizing};
 Point(7) = {0.1,0.02,0, sizing};

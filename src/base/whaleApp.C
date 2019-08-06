@@ -36,8 +36,7 @@ associateSyntaxInner(Syntax & syntax, ActionFactory & /*action_factory*/)
   registerSyntax("FSISolidAction", "FSI/Solid/*");
 
   registerSyntax("EmptyAction", "FSI/Interface");
-  registerSyntax("FSInterfaceAction"
-                 "FSI/Interface/*");
+  registerSyntax("FSInterfaceAction", "FSI/Interface/*");
 
   registerTask("get_blocks_from_mesh", /*is_required=*/false);
   registerTask("apply_var_to_blocks", /*is_required=*/false);
