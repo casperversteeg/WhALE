@@ -20,9 +20,10 @@ VelocityContinuity::VelocityContinuity(const InputParameters & parameters)
     // By default will make the solid-domain velocity the neighbor variable, although may also
     // define solid_displacement to couple in a displacement field, in which case this kernel will
     // use the _u_dot from that field
-    _coupled_var(getParam<bool>("neighbor_displacements")
-                     ? (_is_transient ? coupledNeighborValueDot("neighbor_var") : _zero)
-                     : _neighbor_var.slnNeighbor())
+    _coupled_var(coupledNeighborValueDot("neighbor_var"))
+// _coupled_var(getParam<bool>("neighbor_displacements")
+//                  ? (_is_transient ? coupledNeighborValueDot("neighbor_var") : _zero)
+//                  : _neighbor_var.slnNeighbor())
 {
 }
 
@@ -51,30 +52,86 @@ VelocityContinuity::computeQpResidual(Moose::DGResidualType type)
 
   return r;
 }
+Real VelocityContinuity::computeQpJacobian(Moose::DGJacobianType) { return 0; }
+// Real
+// VelocityContinuity::computeQpJacobian(Moose::DGJacobianType type)
+// {
+//   // Compute the Jacobian for both the master and neighbor domains.
+//   Real jac = 0;
+//   switch (type)
+//   {
+//     // Compute dR_w / du
+//     case Moose::ElementElement:
+//       jac = _test[_i][_qp] * _penalty * _phi[_j][_qp];
+//       break;
+//     // Compute dR_w / dd
+//     case Moose::ElementNeighbor:
+//       jac = _test[_i][_qp] * _penalty * _phi_neighbor[_j][_qp];
+//       break;
+//     // Compute dR_f / du
+//     case Moose::NeighborElement:
+//       jac = _test_neighbor[_i][_qp] * -_penalty * _phi[_j][_qp];
+//       break;
+//     // Compute dR_f / dd
+//     case Moose::NeighborNeighbor:
+//       jac = _test_neighbor[_i][_qp] * _penalty * _phi_neighbor[_j][_qp];
+//       break;
+//   }
+//   return jac;
+// }
 
 Real
-VelocityContinuity::computeQpJacobian(Moose::DGJacobianType type)
+VelocityContinuity::computeQpOffDiagJacobian(Moose::DGJacobianType type, unsigned int jvar)
 {
-  // Compute the Jacobian for both the master and neighbor domains.
   Real jac = 0;
-  switch (type)
+  if (jvar == _var.number())
   {
-    // Compute dR_w / du
-    case Moose::ElementElement:
-      jac = _test[_i][_qp] * _penalty * _phi[_j][_qp];
-      break;
-    // Compute dR_w / dd
-    case Moose::ElementNeighbor:
-      jac = _test[_i][_qp] * _penalty * _phi_neighbor[_j][_qp];
-      break;
-    // Compute dR_f / du
-    case Moose::NeighborElement:
-      jac = _test_neighbor[_i][_qp] * -_penalty * _phi[_j][_qp];
-      break;
-    // Compute dR_f / dd
-    case Moose::NeighborNeighbor:
-      jac = _test_neighbor[_i][_qp] * -_penalty * _phi_neighbor[_j][_qp];
-      break;
+    switch (type)
+    {
+      case Moose::ElementElement:
+        jac = _test[_i][_qp] * _penalty * _phi[_j][_qp];
+        break;
+
+      case Moose::NeighborElement:
+        jac = _test_neighbor[_i][_qp] * -_penalty * _phi[_j][_qp];
+        break;
+
+      case Moose::ElementNeighbor:
+      case Moose::NeighborNeighbor:
+        break;
+    }
   }
+  else if (jvar == _neighbor_var.number())
+  {
+    switch (type)
+    {
+      case Moose::ElementNeighbor:
+        jac = _test[_i][_qp] * _penalty * -_phi_neighbor[_j][_qp];
+        break;
+
+      case Moose::NeighborNeighbor:
+        jac = _test_neighbor[_i][_qp] * -_penalty * -_phi_neighbor[_j][_qp];
+        break;
+
+      case Moose::ElementElement:
+      case Moose::NeighborElement:
+        break;
+    }
+  }
+
   return jac;
+}
+
+void
+VelocityContinuity::computeElementOffDiagJacobian(unsigned int jvar)
+{
+  computeOffDiagElemNeighJacobian(Moose::ElementElement, jvar);
+  computeOffDiagElemNeighJacobian(Moose::ElementNeighbor, jvar);
+}
+
+void
+VelocityContinuity::computeNeighborOffDiagJacobian(unsigned int jvar)
+{
+  computeOffDiagElemNeighJacobian(Moose::NeighborElement, jvar);
+  computeOffDiagElemNeighJacobian(Moose::NeighborNeighbor, jvar);
 }
