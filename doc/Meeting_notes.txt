@@ -1,0 +1,22 @@
+
+[MEETING NOTES 2019/08/07]:
+
+Ratio of advection to diffusion becomes large
+mesh resolution isn't able to capture high gradients in fields
+SUPG provides artificial diffusivity to stabilize
+
+ramp up velocity (Reynolds number, really) at inlet over time
+  -- may need to decrease timestep (quite probably actually)
+  -- if it's slowly enough possibly not
+
+move to material properties for fluid and solid that are more physical
+
+In parallel also make a 3D model
+
+Eddy length scales in turbulence (implement LES?)
+  -- resolve large eddies only, but cascade energy like the littler ones are there
+  -- Look at DNS Vs. LES
+
+Do the homework:
+  -- Figure out Reynolds numbers for the flow we want
+  -- What are the eddy lengthscales etc...

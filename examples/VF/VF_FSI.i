@@ -4,7 +4,8 @@
   laplace = true
   convective_term = true
   transient_term = true
-  pspg = false
+  pspg = true
+  supg = true
   displacements = 'disp_x disp_y'
 []
 
@@ -293,7 +294,7 @@
   [./density]
     type = GenericConstantMaterial
     prop_names = 'density'
-    prop_values = '1e2'
+    prop_values = '1e3'
     block = 'VF'
   [../]
   [./const]
@@ -367,17 +368,17 @@
 
   nl_rel_tol = 1e-10
   nl_abs_tol = 1e-7
-  nl_max_its = 15
+  nl_max_its = 150
   l_tol = 1e-6
-  l_max_its = 300
-  end_time = 5e-3
+  #l_max_its = 300
+  end_time = 2e-3
 
   solve_type = 'NEWTON'
-  # petsc_options_iname = '-pc_type'
-  # petsc_options_value = 'lu'
+   petsc_options_iname = '-pc_type'
+   petsc_options_value = 'lu'
   # petsc_options = '-snes_converged_reason -ksp_converged_reason'
-  petsc_options_iname = '-ksp_gmres_restart -pc_type -sub_pc_type -sub_pc_factor_levels'
-  petsc_options_value = '300                bjacobi  ilu          4'
+  #petsc_options_iname = '-ksp_gmres_restart -pc_type -sub_pc_type -sub_pc_factor_levels'
+  #petsc_options_value = '300                bjacobi  ilu          4'
   line_search = bt
 []
 
