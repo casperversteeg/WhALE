@@ -79,16 +79,22 @@ FSISolidAction::FSISolidAction(const InputParameters & params)
 {
   if (_is_transient)
   {
-    if (!isParamValid("beta") || !isParamValid("gamma"))
-      mooseError("For transient problems, both beta and gamma must be specified for Newmark time "
-                 "integration.");
-    std::vector<std::string> comps = {"x", "y", "z"};
-    for (unsigned int i = 0; i < _ndisp; ++i)
+    if (!isParamValid("beta") && !isParamValid("gamma"))
     {
-      // generate VariableName (basically a std::string alias) for vel and accel aux
-      _velocities[i] = "vel_" + comps[i];
-      _accelerations[i] = "accel_" + comps[i];
+      return;
     }
+    else if (isParamValid("beta") && isParamValid("gamma"))
+    {
+      std::vector<std::string> comps = {"x", "y", "z"};
+      for (unsigned int i = 0; i < _ndisp; ++i)
+      {
+        // generate VariableName (basically a std::string alias) for vel and accel aux
+        _velocities[i] = "vel_" + comps[i];
+        _accelerations[i] = "accel_" + comps[i];
+      }
+    }
+    else
+      mooseError("For transient problems, either set both or neither beta and gamma.");
   }
 }
 

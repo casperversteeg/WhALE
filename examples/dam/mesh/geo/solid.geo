@@ -8,8 +8,8 @@ sizing = 0.001;
 
 // Build points
 Point(1) = {0.0495,0,0, sizing};
-Point(2) = {0.0495,0.0195,0, sizing};
-Point(3) = {0.0505,0.0195,0, sizing};
+Point(2) = {0.0495,0.01,0, sizing};
+Point(3) = {0.0505,0.01,0, sizing};
 Point(4) = {0.0505,0,0, sizing};
 
 // Build lines between points:
@@ -26,6 +26,6 @@ Plane Surface(1) = {1};
 Physical Surface("solid") = {1};
 
 Physical Line("fixed") = {4};
-Physical Line("left") = {1};
-Physical Line("top") = {2};
-Physical Line("right") = {3};
+Physical Line("dam_left") = {1};
+Physical Line("dam_top") = {2};
+Physical Line("dam_right") = {3};

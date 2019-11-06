@@ -1,0 +1,43 @@
+[MEETING NOTES 2019/09/18]:
+
+When measuring voiced sounds, fundamental frequency of sound is directly influenced by frequency of the glottis.
+For unvoiced sounds, not really a correlation.
+Can we predict the fundamental frequency of vibration of the vocal folds
+  -- Is actuation of the vocal folds itself by the muscles important in the vibration profile
+  --
+Lets say wn = 100 Hz, simulation runs too short, if we can match the frequency but not the full number of cycles, how much data do we need to be able to properly capture the frequency information.
+
+Can we obtain sustained vibration with vocal fold material properties with compressible/incompressible flow?
+Small flow regimes so DNS is feasible.
+What is the role of actuation (muscles) in the vocal folds
+Get a document where we share questions and are able to drill down on them... (Slack, GDrive, Box, etc...)
+
+Will be getting a video that captures what we see at the vocal folds, and the recorded sound produced.
+
+See with Paul Bendich if Duke has a Slack subscription to get some premium features.
+Reserve room in Gross for next meeting Oct 9th.
+
+Possibly attend meeting with clinicians. Figure out what data to collect so they can get it when they meet with patients.
+
+
+[MEETING NOTES 2019/08/07]:
+
+Ratio of advection to diffusion becomes large
+mesh resolution isn't able to capture high gradients in fields
+SUPG provides artificial diffusivity to stabilize
+
+ramp up velocity (Reynolds number, really) at inlet over time
+  -- may need to decrease timestep (quite probably actually)
+  -- if it's slowly enough possibly not
+
+move to material properties for fluid and solid that are more physical
+
+In parallel also make a 3D model
+
+Eddy length scales in turbulence (implement LES?)
+  -- resolve large eddies only, but cascade energy like the littler ones are there
+  -- Look at DNS Vs. LES
+
+Do the homework:
+  -- Figure out Reynolds numbers for the flow we want
+  -- What are the eddy lengthscales etc...

@@ -1,0 +1,35 @@
+[Tests]
+  # Solid action tests
+  [./TM_consistency_steady]
+    type = 'Exodiff'
+    input = 'FSI_solid_steady.i'
+    cli_args = 'Outputs/file_base=TM_steady'
+    exodiff = 'TM_steady.e'
+
+    requirement = "The FSI/Solid action shall build the correct set of TensorMechanics kernels for a steady problem."
+  [../]
+  [./TM_consistency_transient]
+    type = 'Exodiff'
+    input = 'FSI_solid_transient.i'
+    cli_args = 'Outputs/file_base=TM_transient'
+    exodiff = 'TM_transient.e'
+
+    requirement = "The FSI/Solid action shall build the correct set of kernels for a transient problem."
+  [../]
+  [./FSISolidSteady]
+    type = 'Exodiff'
+    input = 'FSI_solid_steady.i'
+    exodiff = 'FSI_solid_steady.e'
+    cli_args = 'Outputs/file_base=FSI_solid_steady'
+
+    prereq = "TM_consistency_steady"
+  [../]
+  [./FSISolidTransient]
+    type = 'Exodiff'
+    input = 'FSI_solid_transient.i'
+    exodiff = 'FSI_solid_transient.e'
+    cli_args = 'Outputs/file_base=FSI_solid_transient'
+
+    prereq = "TM_consistency_transient"
+  [../]
+[]
