@@ -20,10 +20,10 @@ VelocityContinuity::VelocityContinuity(const InputParameters & parameters)
     // By default will make the solid-domain velocity the neighbor variable, although may also
     // define solid_displacement to couple in a displacement field, in which case this kernel will
     // use the _u_dot from that field
-    _coupled_var(coupledNeighborValueDot("neighbor_var"))
-// _coupled_var(getParam<bool>("neighbor_displacements")
-//                  ? (_is_transient ? coupledNeighborValueDot("neighbor_var") : _zero)
-//                  : _neighbor_var.slnNeighbor())
+    // _coupled_var(coupledNeighborValueDot("neighbor_var"))
+    _coupled_var(getParam<bool>("neighbor_displacements")
+                     ? (_is_transient ? coupledNeighborValueDot("neighbor_var") : _zero)
+                     : _neighbor_var.slnNeighbor())
 {
 }
 

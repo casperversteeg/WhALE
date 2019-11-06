@@ -44,15 +44,23 @@
 [AuxVariables]
   [./vel_x_aux]
     block = 'solid'
+    order = SECOND
+    family = LAGRANGE
   [../]
   [./accel_x]
     block = 'solid'
+    order = SECOND
+    family = LAGRANGE
   [../]
   [./vel_y_aux]
     block = 'solid'
+    order = SECOND
+    family = LAGRANGE
   [../]
   [./accel_y]
     block = 'solid'
+    order = SECOND
+    family = LAGRANGE
   [../]
 []
 
@@ -206,10 +214,10 @@
 
 [Modules/TensorMechanics/Master]
   [./solid_domain]
-    strain = FINITE
+    strain = SMALL
     # add_variables = true
     # incremental = false
-    # generate_output = 'strain_xx strain_yy strain_zz' ## Not at all necessary, but nice
+    generate_output = 'stress_xx' ## Not at all necessary, but nice
     block = 'solid'
   [../]
 []
@@ -222,7 +230,7 @@
     block = 'solid'
   [../]
   [./_elastic_stress1]
-    type = ComputeFiniteStrainElasticStress
+    type = ComputeLinearElasticStress
     block = 'solid'
   [../]
   [./density]
@@ -293,14 +301,14 @@
   #   beta = 0.25
   #   gamma = 0.5
   # [../]
-  dt = 1e-4
+  dt = 5e-4
 
   nl_rel_tol = 1e-10
   nl_abs_tol = 1e-7
   nl_max_its = 15
   l_tol = 1e-6
   l_max_its = 300
-  end_time = 5e-3
+  end_time = 1e-2
 
   solve_type = 'PJFNK'
   petsc_options_iname = '-pc_type'
@@ -316,9 +324,9 @@
     type = Exodus
   [../]
 []
-
-[Debug]
-  show_actions = true
-  show_var_residual_norms = true
-  show_parser = true
-[]
+#
+# [Debug]
+#   show_actions = true
+#   show_var_residual_norms = true
+#   show_parser = true
+# []
