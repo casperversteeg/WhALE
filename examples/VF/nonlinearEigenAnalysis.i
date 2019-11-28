@@ -55,6 +55,12 @@
 []
 
 [Executioner]
+  # type = Eigenvalue
+  # eigen_problem_type = gen_non_hermitian
+  # which_eigen_pairs = 'SMALLEST_MAGNITUDE'
+  # n_eigen_pairs = 2
+  # n_basis_vectors = 18
+  # solve_type = jacobi_davidson
   type = NonlinearEigen
 
   bx_norm = 'unorm'
@@ -89,6 +95,13 @@
     execute_on = linear
   [../]
 
+[]
+
+[VectorPostprocessors]
+  [./eigenvalues]
+    type = Eigenvalues
+    execute_on = 'timestep_end'
+  [../]
 []
 
 [Outputs]

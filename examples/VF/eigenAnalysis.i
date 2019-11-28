@@ -95,25 +95,29 @@
 [Executioner]
   type = Eigenvalue
   eigen_problem_type = gen_non_hermitian
-  which_eigen_pairs = SMALLEST_MAGNITUDE
-  n_eigen_pairs = 1
+  which_eigen_pairs = 'SMALLEST_MAGNITUDE'
+  n_eigen_pairs = 10
   n_basis_vectors = 18
-  solve_type = PJFNK
-  petsc_options = '-eps_view'
+  solve_type = jacobi_davidson
+  petsc_options = '-eps_view -eps_all'
+  verbose = true
 []
 
 [VectorPostprocessors]
   [./eigenvalues]
     type = Eigenvalues
-    execute_on = 'timestep_end'
+    contains_complete_history = true
+    # execute_on = 'timestep_end'
   [../]
 []
 
 [Outputs]
   csv = true
-  execute_on = 'timestep_end'
-  [./console]
-    type = Console
-    outlier_variable_norms = false
-  [../]
+  # execute_on = 'timestep_end'
+  [./out]
+    type = Exodus
+    # sequence = true
+    # overwrite = true
+    # execute_on = 'timestep_end'
+  []
 []
