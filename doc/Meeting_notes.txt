@@ -1,3 +1,31 @@
+[MEETING NOTES 2019/11/06]:
+
+Fix Moose problem, but also verify that we're computing modes correctly with cantilever beam problem
+
+Modeling the human voice through 3D printing:
+
+
+
+[MEETING NOTES 2019/10/28]:
+
+REU over Summer to 3D print model maybe?
+  -> Coordination / organization
+  -> more experimental
+  -> mentorship
+    => advertise it
+    => raw talent takes priority
+
+To some extent all components of voice important
+  -> No real idea of sensitivity
+
+Model complexity
+  1) low Re FSI
+    - can we excite VF modes w flow only (DNS as far as we can push it)
+    - Incompressible LES
+    Target mode of vib
+    -> see frequency content of structure
+
+
 [MEETING NOTES 2019/09/18]:
 
 When measuring voiced sounds, fundamental frequency of sound is directly influenced by frequency of the glottis.
