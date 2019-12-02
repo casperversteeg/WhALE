@@ -89,7 +89,7 @@ INSALEInterfaceTraction::computeQpResidual(Moose::DGResidualType type)
       // Is negative because reaction goes other direction in the neighbor domain
       break;
   }
-
+  std::cout << r << std::endl;
   return r;
 }
 

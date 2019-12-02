@@ -1,3 +1,9 @@
+[Debug]
+#   show_actions = true
+  show_var_residual_norms = true
+#   show_parser = true
+[]
+
 [GlobalParams]
   gravity = '0 0 0'
   integrate_p_by_parts = false
