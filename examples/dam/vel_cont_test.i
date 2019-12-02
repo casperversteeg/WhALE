@@ -213,11 +213,12 @@
 []
 
 [Modules/TensorMechanics/Master]
+  generate_output = 'stress_xx'
   [./solid_domain]
     strain = SMALL
     # add_variables = true
     # incremental = false
-    generate_output = 'stress_xx' ## Not at all necessary, but nice
+    # generate_output = 'stress_xx' ## Not at all necessary, but nice
     block = 'solid'
   [../]
 []

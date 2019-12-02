@@ -266,6 +266,30 @@
     use_displaced_mesh = true
 
   [../]
+  [./traction_x]
+    type = INSALEInterfaceTraction
+    variable = vel_x
+    component = 0
+    neighbor_var = disp_x
+    u = vel_x
+    v = vel_y
+    p = p
+    boundary = 'VF_fsi'
+    penalty = 1e6
+    use_displaced_mesh = true
+  [../]
+  [./traction_y]
+    type = INSALEInterfaceTraction
+    variable = vel_y
+    component = 1
+    neighbor_var = disp_y
+    u = vel_x
+    v = vel_y
+    p = p
+    boundary = 'VF_fsi'
+    penalty = 1e6
+    use_displaced_mesh = true
+  [../]
 []
 
 [Modules/TensorMechanics/Master]
