@@ -272,30 +272,6 @@
     use_displaced_mesh = true
 
   [../]
-  [./traction_x]
-    type = INSALEInterfaceTraction
-    variable = vel_x
-    component = 0
-    neighbor_var = disp_x
-    u = vel_x
-    v = vel_y
-    p = p
-    boundary = 'VF_fsi'
-    penalty = 1e6
-    use_displaced_mesh = true
-  [../]
-  [./traction_y]
-    type = INSALEInterfaceTraction
-    variable = vel_y
-    component = 1
-    neighbor_var = disp_y
-    u = vel_x
-    v = vel_y
-    p = p
-    boundary = 'VF_fsi'
-    penalty = 1e6
-    use_displaced_mesh = true
-  [../]
 []
 
 [Modules/TensorMechanics/Master]
@@ -382,7 +358,26 @@
     boundary = 'fixed no_slip inlet outlet'
     value = 0
     use_displaced_mesh = true
-
+  [../]
+  [./fsi_traction_x]
+    type = INSALETractionBC
+    variable = disp_x
+    component = 0
+    boundary = 'VF_fsi'
+    p = p
+    u = vel_x
+    v = vel_y
+    displacements = 'disp_x disp_y'
+  [../]
+  [./fsi_traction_y]
+    type = INSALETractionBC
+    variable = disp_y
+    component = 1
+    boundary = 'VF_fsi'
+    p = p
+    u = vel_x
+    v = vel_y
+    displacements = 'disp_x disp_y'
   [../]
 []
 
