@@ -32,3 +32,19 @@ INSVectorBase::INSVectorBase(const InputParameters & parameters)
     _rho(getMaterialProperty<Real>("rho_name"))
 {
 }
+
+Real
+INSVectorBase::computeQpResidual()
+{
+  return 0;
+}
+Real
+INSVectorBase::computeQpJacobian()
+{
+  return 0;
+}
+Real
+INSVectorBase::computeQpOffDiagJacobian(unsigned int jvar)
+{
+  return 0;
+}
