@@ -12,7 +12,7 @@
     xmax = 2
     ymin = 0
     ymax = 1
-    elem_type = QUAD9
+    elem_type = QUAD4
     nx = 10
     ny = 5
   []
@@ -48,11 +48,11 @@
 
 [Variables]
   [vel_x]
-    order = SECOND
+    order = FIRST
     family = LAGRANGE
   []
   [vel_y]
-    order = SECOND
+    order = FIRST
     family = LAGRANGE
   []
   [p]
@@ -61,11 +61,11 @@
     block = 'fluid'
   []
   [disp_x]
-    order = SECOND
+    order = FIRST
     family = LAGRANGE
   []
   [disp_y]
-    order = SECOND
+    order = FIRST
     family = LAGRANGE
   []
 []
@@ -74,17 +74,18 @@
   displacements = 'disp_x disp_y'
   convective_term = true
   transient_term = true
+  pspg=true
 []
 
 
 [AuxVariables]
   [accel_x]
     block = 'solid'
-    order = SECOND
+    order = FIRST
   []
   [accel_y]
     block = 'solid'
-    order = SECOND
+    order = FIRST
   []
 []
 
@@ -170,20 +171,18 @@
   []
 
   [SolidInertia_x]
-    type = InertialForceFromVel
+    type = InertialForce
     variable = disp_x
     velocity = vel_x
-    # displacement = disp_x
     acceleration = accel_x
     beta = 0.25
     gamma = 0.5
     block = 'solid'
   []
   [SolidInetia_y]
-    type = InertialForceFromVel
+    type = InertialForce
     variable = disp_y
     velocity = vel_y
-    # displacement = disp_y
     acceleration = accel_y
     beta = 0.25
     gamma = 0.5
@@ -203,6 +202,30 @@
     block = 'solid'
   []
 
+  # [vxs_time_derivative_term]
+  #   type = CoupledTimeDerivative
+  #   variable = vel_x
+  #   v = disp_x
+  #   block = 'solid'
+  # []
+  # [vys_time_derivative_term]
+  #   type = CoupledTimeDercivative
+  #   variable = vel_y
+  #   v = disp_y
+  #   block = 'solid'
+  # []
+  # [source_vxs]
+  #   type = MatReaction
+  #   variable = vel_x
+  #   block = 'solid'
+  #   mob_name = 1
+  # []
+  # [source_vys]
+  #   type = MatReaction
+  #   variable = vel_y
+  #   block = 'solid'
+  #   mob_name = 1
+  # []
 []
 
 [InterfaceKernels]
@@ -243,7 +266,7 @@
 [Modules/TensorMechanics/Master]
   [./solid_domain]
     strain = SMALL
-    generate_output = 'stress_xx stress_yy'
+    generate_output = 'stress_xx stress_yy' ## Not at all necessary, but nice
     block = 'solid'
   [../]
 []
@@ -314,14 +337,14 @@
 []
 [Executioner]
   type = Transient
-  dt = 1e-4
+  dt = 1e-3
 
   nl_rel_tol = 1e-10
   nl_abs_tol = 1e-7
   nl_max_its = 150
   l_tol = 1e-6
   l_max_its = 300
-  end_time = 1e-1
+  end_time = 1e-0
 
   solve_type = 'PJFNK'
 []
