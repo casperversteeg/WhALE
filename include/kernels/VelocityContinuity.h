@@ -20,5 +20,7 @@ protected:
   virtual Real computeQpResidual(Moose::DGResidualType type) override;
   virtual Real computeQpJacobian(Moose::DGJacobianType type) override;
 
-  const VariableValue & _coupled_dot;
+  // const VariableValue & _u_dot;
+  const VariableValue & _neighbor_dot;
+  const VariableValue & _neighbor_old;
 };

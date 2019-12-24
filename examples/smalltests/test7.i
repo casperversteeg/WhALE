@@ -39,10 +39,10 @@
     paired_block = '1'
     new_boundary = 'fsi'
   []
-  [break_boundary]
-    input = interface
-    type = BreakBoundaryOnSubdomainGenerator
-  []
+  # [break_boundary]
+  #   input = interface
+  #   type = BreakBoundaryOnSubdomainGenerator
+  # []
 []
 
 
@@ -210,18 +210,6 @@
 []
 
 [InterfaceKernels]
-  [v_interface_x]
-    type = VelocityContinuity
-    variable = vel_x
-    neighbor_var = disp_x
-    boundary = 'fsi'
-  []
-  [v_interface_y]
-    type = VelocityContinuity
-    variable = vel_y
-    neighbor_var = disp_y
-    boundary = 'fsi'
-  []
   [vdiff_x]
     type = InterfaceDiffusion
     variable = vel_x
@@ -321,7 +309,7 @@
   nl_max_its = 150
   l_tol = 1e-6
   l_max_its = 300
-  end_time = 1e-2
+  num_steps = 20
 
   solve_type = 'PJFNK'
 []

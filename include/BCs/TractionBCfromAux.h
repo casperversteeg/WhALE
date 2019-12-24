@@ -17,11 +17,10 @@ public:
   // Constructor
   TractionBCfromAux(const InputParameters & parameters);
   // Destructor
-  virtual ~TractionBCfromAux() {}
 
 protected:
   // Override residual computation
   virtual Real computeQpResidual() override;
   // The variable that couples into this boundary condition
-  const VariableValue & _aux_variable;
+  const VariableValue & _traction;
 };

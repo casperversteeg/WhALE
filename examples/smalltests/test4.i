@@ -36,7 +36,7 @@
     type = FunctionAux
     variable = traction_y
     boundary = 'top'
-    function = '1'
+    function = '0'
   []
 []
 
@@ -58,24 +58,38 @@
   [no_y]
     type = DirichletBC
     variable = disp_y
-    boundary = 'bottom'
+    boundary = 'bottom top'
     value = 0.0
   []
 
   [top_traction_x]
-    type = CoupledPressureBC
+    type = TractionBCfromAux
     variable = disp_x
     boundary = 'top'
-    pressure = traction_x
+    traction = traction_x
     component = 0
   []
   [top_traction_y]
-    type = CoupledPressureBC
+    type = TractionBCfromAux
     variable = disp_y
     boundary = 'top'
-    pressure = traction_y
+    traction = traction_y
     component = 1
   []
+  # [top_traction_x]
+  #   type = CoupledPressureBC
+  #   variable = disp_x
+  #   boundary = 'top'
+  #   pressure = traction_x
+  #   component = 0
+  # []
+  # [top_traction_y]
+  #   type = CoupledPressureBC
+  #   variable = disp_y
+  #   boundary = 'top'
+  #   pressure = traction_y
+  #   component = 1
+  # []
 []
 
 [Materials]
