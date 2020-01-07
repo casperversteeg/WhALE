@@ -3,13 +3,15 @@
 # Global parameters that will be set for all kernels in the simulation
 [GlobalParams]
   displacements = 'disp_x disp_y'
-  order = SECOND
 []
 
 # Load or build mesh file for this problem.
 [Mesh]
-
+  type = FileMesh
+  file = mesh/solid.msh
+  dim = 2
 []
+
 
 # Set material parameters based on mesh regions
 [Materials]
@@ -30,14 +32,29 @@
 
 # Variables in the problem's governing equations which must be solved
 [Variables]
-
+  [disp_x]
+    order = SECOND
+  []
+  [disp_y]
+    order = SECOND
+  []
 []
 
 # Auxiliary variables used for postprocessing and passing data between apps
 [AuxVariables]
   [traction_x]
+    order = CONSTANT
+    family = MONOMIAL
   []
   [traction_y]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [vel_x]
+    order = SECOND
+  []
+  [vel_y]
+    order = SECOND
   []
 []
 
@@ -56,14 +73,8 @@
 [Modules/TensorMechanics/Master]
   [all]
     strain = SMALL
-    generate_output = 'stress_xx stress_yy'
-    add_variables = true
+    # generate_output = 'stress_xx stress_yy'
   []
-[]
-
-# Operations defined on auxiliary variables that will be computed at end
-[AuxKernels]
-
 []
 
 # Model boundary conditions that need to be enforced
@@ -83,20 +94,27 @@
   [fsi_traction_x]
     type = TractionBCfromAux
     variable = disp_x
-    boundary = 'no_slip'
+    boundary = 'dam'
     traction = traction_x
   []
   [fsi_traction_y]
     type = TractionBCfromAux
     variable = disp_y
-    boundary = 'no_slip'
+    boundary = 'dam'
     traction = traction_y
   []
-[]
-
-# Define postprocessor operations that can be used for viewing data/statistics
-[Postprocessors]
-
+  # [fsi_vel_x]
+  #   type = CoupledVelocityBC
+  #   variable = disp_x
+  #   boundary = 'dam'
+  #   v = vel_x
+  # []
+  # [fsi_vel_y]
+  #   type = CoupledVelocityBC
+  #   variable = disp_y
+  #   boundary = 'dam'
+  #   v = vel_y
+  # []
 []
 
 # Set up matrix preconditioner to improve convergence

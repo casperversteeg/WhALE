@@ -36,6 +36,4 @@ Physical Surface("fluid") = {1};
 Physical Line("inlet") = {8};
 Physical Line("outlet") = {6};
 Physical Line("no_slip") = {1, 5, 7};
-Physical Line("dam_left") = {2};
-Physical Line("dam_top") = {3};
-Physical Line("dam_right") = {4};
+Physical Line("dam") = {2, 3, 4};
