@@ -176,7 +176,7 @@
 [Executioner]
   type = Transient
 
-  dt = 1e-4
+  dt = 1e-5
   nl_abs_tol = 1e-6
 
   solve_type = 'NEWTON'
