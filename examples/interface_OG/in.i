@@ -42,11 +42,11 @@
 
 [Variables]
   [./vel_x]
-    block = 0
+    # block = 0
     order = SECOND
   [../]
   [./vel_y]
-    block = 0
+    # block = 0
     order = SECOND
   [../]
   [./p]
@@ -59,14 +59,14 @@
   [./disp_y]
     order = SECOND
   [../]
-  [./vel_x_solid]
-    order = SECOND
-    block = 1
-  [../]
-  [./vel_y_solid]
-    order = SECOND
-    block = 1
-  [../]
+  # [./vel_x_solid]
+  #   order = SECOND
+  #   block = 1
+  # [../]
+  # [./vel_y_solid]
+  #   order = SECOND
+  #   block = 1
+  # [../]
 []
 
 [Kernels]
@@ -140,36 +140,36 @@
   [./accel_tensor_x]
     type = CoupledTimeDerivative
     variable = disp_x
-    v = vel_x_solid
+    v = vel_x
     block = 1
   [../]
   [./accel_tensor_y]
     type = CoupledTimeDerivative
     variable = disp_y
-    v = vel_y_solid
+    v = vel_y
     block = 1
   [../]
   [./vxs_time_derivative_term]
     type = CoupledTimeDerivative
-    variable = vel_x_solid
+    variable = vel_x
     v = disp_x
     block = 1
   [../]
   [./vys_time_derivative_term]
     type = CoupledTimeDerivative
-    variable = vel_y_solid
+    variable = vel_y
     v = disp_y
     block = 1
   [../]
   [./source_vxs]
     type = MatReaction
-    variable = vel_x_solid
+    variable = vel_x
     block = 1
     mob_name = 1
   [../]
   [./source_vys]
     type = MatReaction
-    variable = vel_y_solid
+    variable = vel_y
     block = 1
     mob_name = 1
   [../]
@@ -180,7 +180,7 @@
     type = CoupledPenaltyInterfaceDiffusion
     variable = vel_x
     neighbor_var = disp_x
-    slave_coupled_var = vel_x_solid
+    slave_coupled_var = vel_x
     boundary = master0_interface
     penalty = 1e8
   [../]
@@ -188,7 +188,7 @@
     type = CoupledPenaltyInterfaceDiffusion
     variable = vel_y
     neighbor_var = disp_y
-    slave_coupled_var = vel_y_solid
+    slave_coupled_var = vel_y
     boundary = master0_interface
     penalty = 1e6
   [../]
@@ -255,13 +255,13 @@
   [../]
   [./solid_x_no_slip]
     type = DirichletBC
-    variable = vel_x_solid
+    variable = vel_x
     boundary = 'top left_to_1 right_to_1'
     value = 0.0
   [../]
   [./solid_y_no_slip]
     type = DirichletBC
-    variable = vel_y_solid
+    variable = vel_y
     boundary = 'top left_to_1 right_to_1'
     value = 0.0
   [../]
