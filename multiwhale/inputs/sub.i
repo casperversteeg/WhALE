@@ -1,6 +1,6 @@
 [Debug]
   # show_actions = true
-  show_var_residual_norms = true
+  # show_var_residual_norms = true
   # show_parser = true
 []
 
@@ -65,45 +65,19 @@
     family = MONOMIAL
     order = CONSTANT
   []
-  [vel_bc_x]
-    family = LAGRANGE
-    order = SECOND
-  []
-  [vel_bc_y]
-    family = LAGRANGE
-    order = SECOND
-  []
   [vel_x]
     order = SECOND
   []
   [vel_y]
     order = SECOND
   []
-  [accel_x]
-    order = SECOND
-  []
-  [accel_y]
-    order = SECOND
-  []
 []
 
 [AuxKernels]
-  [accel_x]
-    type = TestNewmarkTI
-    variable = accel_x
-    displacement = disp_x
-    first = false
-  []
   [vel_x]
     type = TestNewmarkTI
     variable = vel_x
     displacement = disp_x
-  []
-  [accel_y]
-    type = TestNewmarkTI
-    variable = accel_y
-    displacement = disp_y
-    first = false
   []
   [vel_y]
     type = TestNewmarkTI
@@ -116,34 +90,23 @@
   [inertia_x]
     type = InertialForce
     variable = disp_x
-    # acceleration = accel_x
-    # velocity = vel_x
-    # gamma = 0.5
-    # beta = 0.25
   []
   [inertia_y]
     type = InertialForce
     variable = disp_y
-    # acceleration = accel_y
-    # velocity = vel_y
-    # gamma = 0.5
-    # beta = 0.25
   []
 []
 
 [Modules/TensorMechanics/Master]
   [solid_domain]
     strain = SMALL
-    # add_variables = true
-    # incremental = false
-    # generate_output = 'strain_xx strain_yy strain_zz' ## Not at all necessary, but nice
   []
 []
 
 [Materials]
   [elasticity_tensor]
     type = ComputeIsotropicElasticityTensor
-    youngs_modulus = 1e8
+    youngs_modulus = 68.9e9
     poissons_ratio = 0.3
   []
   [elastic_stress1]
@@ -152,7 +115,7 @@
   [density]
     type = GenericConstantMaterial
     prop_names = 'density'
-    prop_values = '1e3'
+    prop_values = '2700'
   []
 []
 
@@ -180,18 +143,6 @@
     variable = disp_y
     boundary = 'dam'
     traction = traction_y
-  []
-  [fsi_vel_x]
-    type = CoupledPresetVelocity
-    variable = disp_x
-    v = vel_bc_x
-    boundary = 'dam'
-  []
-  [fsi_vel_y]
-    type = CoupledPresetVelocity
-    variable = disp_y
-    v = vel_bc_y
-    boundary = 'dam'
   []
 []
 

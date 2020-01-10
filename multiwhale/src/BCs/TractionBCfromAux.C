@@ -31,5 +31,5 @@ TractionBCfromAux::TractionBCfromAux(const InputParameters & parameters)
 Real
 TractionBCfromAux::computeQpResidual()
 {
-  return -_traction[_qp] * _test[_i][_qp];
+  return _traction[_qp] * _test[_i][_qp];
 }

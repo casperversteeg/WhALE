@@ -11,7 +11,6 @@
   convective_term = true
   transient_term = true
   # supg = true
-  displacements = 'disp_x disp_y'
 []
 
 [Mesh]
@@ -133,24 +132,20 @@
     variable = vel_x
     disp_x = disp_x
     disp_y = disp_y
-    use_displaced_mesh = true
   []
   [y_mesh]
     type = INSConvectedMesh
     variable = vel_y
     disp_x = disp_x
     disp_y = disp_y
-    use_displaced_mesh = true
   []
   [smooth_mesh_x]
     type = Diffusion
     variable = disp_x
-    use_displaced_mesh = true
   []
   [smooth_mesh_y]
     type = Diffusion
     variable = disp_y
-    use_displaced_mesh = true
   []
 []
 
@@ -208,19 +203,17 @@
     value = 0.0
     boundary = 'top bottom left right'
   []
-  [move_left]
-    type = FunctionDirichletBC
+  [dam_cont_x]
+    type = CoupledDirichletBC
     variable = disp_x
-    function = '2*t*y'
+    v = disp_bc_x
     boundary = 'dam'
-    use_displaced_mesh = true
   []
-  [move_down]
-    type = FunctionDirichletBC
+  [dam_cont_y]
+    type = CoupledDirichletBC
     variable = disp_y
-    function = '-2*t*y'
+    v = disp_bc_y
     boundary = 'dam'
-    use_displaced_mesh = true
   []
 
   # MATCH VEL
@@ -229,7 +222,6 @@
     variable = vel_x
     v = disp_x
     implicit = false
-    use_displaced_mesh = true
     boundary = 'dam'
   []
   [dam_match_vy]
@@ -237,7 +229,6 @@
     variable = vel_y
     v = disp_y
     implicit = false
-    use_displaced_mesh = true
     boundary = 'dam'
   []
 []
@@ -258,7 +249,7 @@
 
   dt = 1e-6
   # end_time = 1e-1
-  num_steps = 20
+  num_steps = 100
 
   nl_abs_tol = 1e-6
   l_max_its = 100

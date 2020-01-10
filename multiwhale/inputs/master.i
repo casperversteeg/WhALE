@@ -1,6 +1,6 @@
 [Debug]
   # show_actions = true
-  show_var_residual_norms = true
+  # show_var_residual_norms = true
   # show_parser = true
 []
 
@@ -10,7 +10,7 @@
   # laplace = true
   convective_term = true
   transient_term = true
-  # supg = true
+  supg = true
 []
 
 [Mesh]
@@ -153,7 +153,7 @@
   [const]
     type = GenericConstantMaterial
     prop_names = 'rho mu'
-    prop_values = '1 1'
+    prop_values = '999.70 1.307e-3'
   []
 []
 
@@ -173,14 +173,14 @@
   []
   [inlet]
     type = FunctionDirichletBC
-    variable = vel_x
-    function = '.01'
+    variable = p
+    function = '1e7'
     boundary = 'left'
   []
-  [outlet]
-    type = FunctionDirichletBC
-    variable = vel_x
-    function = '.01'
+  [out_p]
+    type = DirichletBC
+    variable = p
+    value = 0.0
     boundary = 'right'
   []
 
@@ -189,14 +189,14 @@
     type = CoupledDirichletDotBC
     variable = vel_x
     v = disp_x
-    implicit = false
+    implicit = true
     boundary = 'dam'
   []
   [fsi_rel_vel_y]
     type = CoupledDirichletDotBC
     variable = vel_y
     v = disp_y
-    implicit = false
+    implicit = true
     boundary = 'dam'
   []
 
@@ -265,7 +265,7 @@
   picard_force_norms = true
 
   dt = 1e-5
-  end_time = 1e-1
+  end_time = 1e-2
   # num_steps = 20
 
   nl_abs_tol = 1e-6
@@ -286,8 +286,7 @@
     input_files = sub.i
     execute_on = 'timestep_end'
     output_sub_cycles = true
-    # sub_cycling = true
-    # interpolate_transfers = true
+    catch_up = true
   []
 []
 
@@ -305,21 +304,6 @@
     multi_app = sub
     source_variable = traction_y
     variable = traction_y
-  []
-
-  [send_vel_x]
-    type = MultiAppInterpolationTransfer
-    direction = to_multiapp
-    multi_app = sub
-    source_variable = vel_x
-    variable = vel_bc_x
-  []
-  [send_vel_y]
-    type = MultiAppInterpolationTransfer
-    direction = to_multiapp
-    multi_app = sub
-    source_variable = vel_y
-    variable = vel_bc_y
   []
 
   [take_disp_x]
