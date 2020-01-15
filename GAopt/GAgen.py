@@ -45,7 +45,7 @@ def makeInputFile(gen, popID):
     infile.close()
 
 def runMoose(gen,popID):
-    sub.check_call(["mpirun -n 12 ../whale-opt -i " + inputFileName(gen,popID)], shell=True)
+    sub.check_call(["mpirun -n 2 ../whale-opt -i " + inputFileName(gen,popID)], shell=True)
 
 def getSimulationResultCSV(gen,pop):
     with open(outputCSVFileName(gen,pop)) as resultFile:
@@ -124,7 +124,7 @@ def computeMutation(mutate):
         xn = 0
         yn = 0
         while norm_x >= 0.1:
-            [x,y] = generateVecLtNorm(0.005)
+            [x,y] = generateVecLtNorm(0.01)
             [xn, yn] = listAdd([x,y],indv)
             norm_x = computeVecNorm(xn,yn)
         ans.append([xn,yn])

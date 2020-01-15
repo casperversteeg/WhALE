@@ -2,25 +2,25 @@ clear all; close all; clc;
 
 Xt = [];
 % Read csv file
-for i = 0:162
+for i = 0:8
     X = readmatrix(strcat('gen',num2str(i),'.csv'));
     Xt = [Xt; X];
-%     dotsize = 10;
-% 
-%     Z = X(:,3);
-%     Y = X(:,2);
-%     X = X(:,1);
-% 
-%     figure;
-%     scatter3(X, Y, Z, dotsize, Z,'filled');
-%     view(2);
-%     ax = gca;
-%     ax.TickLabelInterpreter = 'latex';
-%     xlabel("$x$",'interpreter','latex');
-%     ylabel('$y$','interpreter','latex');
-%     zlabel('$Q$','interpreter','latex');
-%     title(strcat('Generation ', num2str(i)),'interpreter','latex');
-%     xlim([-0.1,0.1]); ylim([-0.1,0.1]);
+    dotsize = 10;
+
+    Z = X(:,3);
+    Y = X(:,2);
+    X = X(:,1);
+
+    figure;
+    scatter3(X, Y, Z, dotsize, Z,'filled');
+    view(2);
+    ax = gca;
+    ax.TickLabelInterpreter = 'latex';
+    xlabel("$x$",'interpreter','latex');
+    ylabel('$y$','interpreter','latex');
+    zlabel('$Q$','interpreter','latex');
+    title(strcat('Generation ', num2str(i)),'interpreter','latex');
+    xlim([-0.1,0.1]); ylim([-0.1,0.1]);
 end
 
 % Xt = readmatrix('gen161.csv');

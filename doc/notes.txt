@@ -38,3 +38,16 @@ What do we need:
  * Some way to couple the mesh convection velocity into the fluid solver
  * Better viscoelastic models for the larynx
  * Fixed point iterative solver
+
+
+[Possible References for Verification]
+- Aeroelastic instability of cantilevered flexible plates in uniform flow. J. Fluid Mech. Eloy et al. 2008
+- Flutter of a rectangular plate. J. Fluids Struct. Eloy et al. 2007
+- Flutter of cantilevered plates. J. Fluids Struct. Huang et al. 1995
+- Linear stability analysis of coupled parallel flexible plates in an axial flow. J. Fluids Struct. Michelin et al. 2009
+- Large-amplitude flapping of an inverted flag in a uniform steady flow: a vortex induced vibration. J. Fluid Mech. Sader et al. 2016
+- Coupled flutter of parallel plates. Phys. Fluids. Schouveiler et al. 2009
+- Effects of flexibility on the hovering performance of flapping wings with different shapes and aspect ratios. J. Fluids Struct. Shahzad et al. 2018
+- Fluid-structure interaction involving large deformations: 3D simulations and applications to biological systems. J. Comput. Phys. Tian et al. 2014
+- Force production and asymmetric deformation of a flexible flapping wing in forward flight. J. Fluids Struct. 2013
+- Improving power extraction efficiency of a flapping plate: from passive deformation to active control. J. Fluids Struct. Tian et al. 2014
