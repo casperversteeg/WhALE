@@ -76,10 +76,10 @@
     family = MONOMIAL
     order = CONSTANT
   []
-  [disp_bc_x]
+  [d_bc_x]
     family = LAGRANGE
   []
-  [disp_bc_y]
+  [d_bc_y]
     family = LAGRANGE
   []
 []
@@ -178,7 +178,7 @@
   [in_p]
     type = DirichletBC
     variable = p
-    value = 1e7
+    value = 1e6
     boundary = 'left'
   []
   [out_p]
@@ -220,13 +220,13 @@
   [couple_x]
     type = CoupledDirichletBC
     variable = disp_x
-    v = disp_bc_x
+    v = d_bc_x
     boundary = 'dam'
   []
   [couple_y]
     type = CoupledDirichletBC
     variable = disp_y
-    v = disp_bc_y
+    v = d_bc_y
     boundary = 'dam'
   []
 []
@@ -269,7 +269,7 @@
   picard_force_norms = true
 
   dt = 1e-4
-  end_time = 1e-1
+  end_time = 1e-2
   # num_steps = 20
 
   nl_abs_tol = 1e-6
@@ -316,13 +316,13 @@
     direction = from_multiapp
     multi_app = sub
     source_variable = disp_x
-    variable = disp_bc_x
+    variable = d_bc_x
   []
   [take_disp_y]
     type = MultiAppNearestNodeTransfer
     direction = from_multiapp
     multi_app = sub
     source_variable = disp_y
-    variable = disp_bc_y
+    variable = d_bc_y
   []
 []

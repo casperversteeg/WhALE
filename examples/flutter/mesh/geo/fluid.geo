@@ -3,11 +3,10 @@ SetFactory("OpenCASCADE");
 D = 1;
 
 Mesh.ElementOrder = 2;
-Mesh.SecondOrderLinear = 0;
-Mesh.Algorithm = 5; // QUAD
+/* Mesh.Algorithm = 5; // QUAD */
 Mesh.Smoothing = 10;
-Mesh.CharacteristicLengthMin = 0.1*D;
-Mesh.CharacteristicLengthMax = 0.1*D;
+Mesh.CharacteristicLengthMin = 0.05*D;
+Mesh.CharacteristicLengthMax = 0.05*D;
 
 
 // Build points
@@ -24,7 +23,7 @@ Recursive Delete {
   Surface{4};
 }
 
-Recombine Surface {3};
+/* Recombine Surface {3}; */
 
 Physical Line("no_slip") = {10,13};
 Physical Line("dam") = {15,16,17};

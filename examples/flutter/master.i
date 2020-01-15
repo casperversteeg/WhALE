@@ -6,12 +6,12 @@
 
 [GlobalParams]
   gravity = '0 0 0'
-  integrate_p_by_parts = true
-  laplace = false
+  integrate_p_by_parts = false
+  laplace = true
   convective_term = true
   transient_term = true
   supg = true
-  # pspg = true
+  pspg = true
 
   order = SECOND
 []
@@ -20,7 +20,7 @@
   type = FileMesh
   file = mesh/mesh.msh
   dim = 2
-  uniform_refine = 1
+  # uniform_refine = 1
 []
 
 [Variables]
@@ -51,6 +51,8 @@
   []
   [disp_bc_y]
     family = LAGRANGE
+  []
+  [v_mag]
   []
 []
 
@@ -115,7 +117,7 @@
   [const]
     type = GenericConstantMaterial
     prop_names = 'rho mu'
-    prop_values = '1 1e-0'
+    prop_values = '1e0 1e-2'
   []
 []
 
@@ -136,28 +138,15 @@
   [inlet]
     type = FunctionDirichletBC
     variable = vel_x
-    function = '(3/2 - (600*x^2)/1681)*0.1'
+    function = '(3/2 - (600*y^2)/1681)'
     boundary = 'inlet'
   []
-  [u_out]
-    type = INSMomentumNoBCBCLaplaceForm
+  [p_out]
+    type = DirichletBC
+    variable = p
+    value = 0.0
     boundary = 'outlet'
-    variable = vel_x
-    u = vel_x
-    v = vel_y
-    p = p
-    component = 0
   []
-  [v_out]
-    type = INSMomentumNoBCBCLaplaceForm
-    boundary = 'outlet'
-    variable = vel_y
-    u = vel_x
-    v = vel_y
-    p = p
-    component = 1
-  []
-
 
 
   # INTERFACE VEL
@@ -224,6 +213,13 @@
     component = 1
     boundary = 'dam'
   []
+  [norm_u]
+    type = VectorMagnitudeAux
+    variable = v_mag
+    x = vel_x
+    y = vel_y
+    execute_on = 'timestep_begin'
+  []
 []
 
 [Preconditioning]
@@ -233,22 +229,35 @@
   []
 []
 
+[Postprocessors]
+  [Courant]
+    type = INSExplicitTimestepSelector
+    beta = 0.3
+    vel_mag = v_mag
+  []
+[]
+
 [Executioner]
   type = Transient
-  #
-  # picard_max_its = 20
-  # picard_abs_tol = 1e-6
-  # picard_force_norms = true
+  
+  picard_max_its = 20
+  picard_abs_tol = 1e-6
+  picard_force_norms = true
 
-  dt = 1e-4
-  end_time = 1e-1
-  # num_steps = 20
+  # dt = 1e-3
+  # end_time = 1e-1
+  num_steps = 20
 
   nl_abs_tol = 1e-6
   nl_max_its = 1e2
   l_max_its = 100
 
   solve_type = 'NEWTON'
+  [TimeStepper]
+    type = PostprocessorDT
+    postprocessor = Courant
+    dt = 1e-2
+  []
 []
 
 [Outputs]
@@ -256,45 +265,45 @@
   exodus = true
 []
 
-# [MultiApps]
-#   [sub]
-#     type = TransientMultiApp
-#     app_type = whaleApp
-#     input_files = sub.i
-#     execute_on = 'timestep_end'
-#     output_sub_cycles = true
-#     catch_up = true
-#   []
-# []
-#
-# [Transfers]
-#   [send_traction_x]
-#     type = MultiAppInterpolationTransfer
-#     direction = to_multiapp
-#     multi_app = sub
-#     source_variable = traction_x
-#     variable = traction_x
-#   []
-#   [send_traction_y]
-#     type = MultiAppInterpolationTransfer
-#     direction = to_multiapp
-#     multi_app = sub
-#     source_variable = traction_y
-#     variable = traction_y
-#   []
-#
-#   [take_disp_x]
-#     type = MultiAppNearestNodeTransfer
-#     direction = from_multiapp
-#     multi_app = sub
-#     source_variable = disp_x
-#     variable = disp_bc_x
-#   []
-#   [take_disp_y]
-#     type = MultiAppNearestNodeTransfer
-#     direction = from_multiapp
-#     multi_app = sub
-#     source_variable = disp_y
-#     variable = disp_bc_y
-#   []
-# []
+[MultiApps]
+  [sub]
+    type = TransientMultiApp
+    app_type = whaleApp
+    input_files = sub.i
+    execute_on = 'timestep_end'
+    output_sub_cycles = true
+    catch_up = true
+  []
+[]
+
+[Transfers]
+  [send_traction_x]
+    type = MultiAppInterpolationTransfer
+    direction = to_multiapp
+    multi_app = sub
+    source_variable = traction_x
+    variable = traction_x
+  []
+  [send_traction_y]
+    type = MultiAppInterpolationTransfer
+    direction = to_multiapp
+    multi_app = sub
+    source_variable = traction_y
+    variable = traction_y
+  []
+
+  [take_disp_x]
+    type = MultiAppNearestNodeTransfer
+    direction = from_multiapp
+    multi_app = sub
+    source_variable = disp_x
+    variable = disp_bc_x
+  []
+  [take_disp_y]
+    type = MultiAppNearestNodeTransfer
+    direction = from_multiapp
+    multi_app = sub
+    source_variable = disp_y
+    variable = disp_bc_y
+  []
+[]

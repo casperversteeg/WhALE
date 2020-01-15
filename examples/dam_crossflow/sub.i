@@ -6,7 +6,7 @@
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
-  order = FIRST
+  order = SECOND
 []
 
 [Mesh]
@@ -18,7 +18,7 @@
     xmax = 0.05
     ymin = 0
     ymax = 0.02
-    elem_type = QUAD4
+    elem_type = QUAD9
     dim = 2
   []
   [solid]
