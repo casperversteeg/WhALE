@@ -46,10 +46,10 @@
     family = MONOMIAL
     order = CONSTANT
   []
-  [disp_bc_x]
+  [d_bc_x]
     family = LAGRANGE
   []
-  [disp_bc_y]
+  [d_bc_y]
     family = LAGRANGE
   []
   [v_mag]
@@ -138,7 +138,7 @@
   [inlet]
     type = FunctionDirichletBC
     variable = vel_x
-    function = '(3/2 - (600*y^2)/1681)'
+    function = '(3/2 - (600*y^2)/1681)*0.01'
     boundary = 'inlet'
   []
   [p_out]
@@ -181,13 +181,13 @@
   [couple_x]
     type = CoupledDirichletBC
     variable = disp_x
-    v = disp_bc_x
+    v = d_bc_x
     boundary = 'dam'
   []
   [couple_y]
     type = CoupledDirichletBC
     variable = disp_y
-    v = disp_bc_y
+    v = d_bc_y
     boundary = 'dam'
   []
 []
@@ -239,7 +239,7 @@
 
 [Executioner]
   type = Transient
-  
+
   picard_max_its = 20
   picard_abs_tol = 1e-6
   picard_force_norms = true
@@ -256,13 +256,14 @@
   [TimeStepper]
     type = PostprocessorDT
     postprocessor = Courant
-    dt = 1e-2
+    dt = 1e-3
   []
 []
 
 [Outputs]
   print_linear_residuals = false
   exodus = true
+  execute_on = 'nonlinear'
 []
 
 [MultiApps]
@@ -297,13 +298,13 @@
     direction = from_multiapp
     multi_app = sub
     source_variable = disp_x
-    variable = disp_bc_x
+    variable = d_bc_x
   []
   [take_disp_y]
     type = MultiAppNearestNodeTransfer
     direction = from_multiapp
     multi_app = sub
     source_variable = disp_y
-    variable = disp_bc_y
+    variable = d_bc_y
   []
 []
