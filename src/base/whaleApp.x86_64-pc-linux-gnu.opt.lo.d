@@ -1,6 +1,6 @@
-/home/casperversteeg/MOOSE/whale/test/src/base/whaleTestApp.x86_64-pc-linux-gnu.opt.lo: \
- /home/casperversteeg/MOOSE/whale/test/src/base/whaleTestApp.C \
- /home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleTestApp.h \
+/home/casperversteeg/MOOSE/whale/src/base/whaleApp.x86_64-pc-linux-gnu.opt.lo: \
+ /home/casperversteeg/MOOSE/whale/src/base/whaleApp.C \
+ /home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleApp.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseApp.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/Moose.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/perf_log.h \
@@ -307,12 +307,11 @@
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/variant_filter_iterator.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/simple_range.h \
  /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point.h \
- /home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleApp.h \
  /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AppFactory.h \
- /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseSyntax.h \
- /home/casperversteeg/MOOSE/moose/modules/module_loader/build/header_symlinks/ModulesApp.h
+ /home/casperversteeg/MOOSE/moose/modules/module_loader/build/header_symlinks/ModulesApp.h \
+ /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseSyntax.h
 
-/home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleTestApp.h:
+/home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleApp.h:
 
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseApp.h:
 
@@ -926,10 +925,8 @@
 
 /home/casperversteeg/MOOSE/moose/scripts/../libmesh/installed/include/libmesh/point.h:
 
-/home/casperversteeg/MOOSE/whale/build/header_symlinks/whaleApp.h:
-
 /home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/AppFactory.h:
 
-/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseSyntax.h:
-
 /home/casperversteeg/MOOSE/moose/modules/module_loader/build/header_symlinks/ModulesApp.h:
+
+/home/casperversteeg/MOOSE/moose/framework/build/header_symlinks/MooseSyntax.h:
