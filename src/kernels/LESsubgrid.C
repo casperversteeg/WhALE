@@ -23,10 +23,15 @@ validParams<LESsubgrid>()
 }
 
 LESsubgrid::LESsubgrid(const InputParameters & parameters)
-  : INSMomentumBase(parameters),
+  : DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>(parameters),
     _mu_sgs(getMaterialProperty<Real>("mu_sgs_name")),
-    _dmu_dvel(getMaterialPropertyDerivative<RankTwoTensor>("mu_sgs_name", _var.name()))
+    _dmu_dvel(_coupled_moose_vars.size())
 {
+  for (unsigned i = 0; i < _coupled_moose_vars.size(); ++i)
+  {
+    _dmu_dvel[i] =
+        &getMaterialPropertyDerivative<Real>("mu_sgs_name", _coupled_moose_vars[i]->name());
+  }
 }
 
 Real
@@ -50,8 +55,5 @@ LESsubgrid::computeQpOffDiagJacobianViscousPart(unsigned jvar)
     return 0;
 
   const unsigned int cvar = mapJvarToCvar(jvar);
-  return (_dmu_dvel[_qp](cvar, 0) * _grad_phi[_j][_qp] +
-          _dmu_dvel[_qp](cvar, 1) * _grad_phi[_j][_qp] +
-          _dmu_dvel[_qp](cvar, 2) * _grad_phi[_j][_qp]) *
-         _grad_test[_i][_qp];
+  return 0; //(*_dmu_dvel[_j])[_qp] * _grad_test[_i][_qp];
 }

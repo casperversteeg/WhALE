@@ -32,7 +32,6 @@ public:
 
 protected:
   virtual void initQpStatefulProperties() override;
-  virtual void compute_dmu_dvel() = 0;
 
   // Coupled variables
   const VariableValue & _u_vel;
@@ -50,9 +49,11 @@ protected:
   unsigned _w_vel_var_number;
   unsigned _p_var_number;
 
+  const VariablePhiGradient & _grad_phi;
+
   const MaterialProperty<Real> & _rho;
   const Real & _current_elem_volume;
 
   MaterialProperty<Real> & _mu_sgs;
-  MaterialProperty<RankTwoTensor> & _dmu_dvel;
+  std::vector<MaterialProperty<Real> *> _dmu_dvel;
 };

@@ -33,5 +33,8 @@ SmagorinskySGS::computeQpProperties()
   S_bar = std::sqrt(2 * S_bar);
 
   _mu_sgs[_qp] = coef * S_bar;
-  _dmu_dvel[_qp] = 2 * coef * Sij / S_bar;
+  for (unsigned i = 0; i < _dmu_dvel.size(); ++i)
+  {
+    (*_dmu_dvel[i])[_qp] = 0; // coef * (Sij.column(i) * _grad_phi[_qp]) / S_bar;
+  }
 }

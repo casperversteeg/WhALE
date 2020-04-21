@@ -29,16 +29,24 @@ SubgridScaleBase::SubgridScaleBase(const InputParameters & parameters)
     _u_vel_var_number(coupled("u")),
     _v_vel_var_number(coupled("v")),
     _w_vel_var_number(coupled("w")),
+    _grad_phi(_assembly.gradPhi()),
     _rho(getMaterialProperty<Real>("rho_name")),
     _current_elem_volume(_assembly.elemVolume()),
     _mu_sgs(declareProperty<Real>("mu_sgs")),
-    _dmu_dvel(declarePropertyDerivative<RankTwoTensor>("mu_sgs"))
+    _dmu_dvel(_coupled_moose_vars.size())
 {
+  for (unsigned i = 0; i < _coupled_moose_vars.size(); ++i)
+  {
+    _dmu_dvel[i] = &declarePropertyDerivative<Real>("mu_sgs", _coupled_moose_vars[i]->name());
+  }
 }
 
 void
 SubgridScaleBase::initQpStatefulProperties()
 {
   _mu_sgs[_qp] = 0;
-  _dmu_dvel[_qp].zero();
+  for (unsigned i = 0; i < _dmu_dvel.size(); ++i)
+  {
+    (*_dmu_dvel[i])[_qp] = 0;
+  }
 }

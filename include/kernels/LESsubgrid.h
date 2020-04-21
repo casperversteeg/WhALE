@@ -13,6 +13,8 @@
 #pragma once
 
 #include "INSMomentumBase.h"
+#include "JvarMapInterface.h"
+#include "DerivativeMaterialInterface.h"
 
 // Forward Declaration
 class LESsubgrid;
@@ -23,7 +25,7 @@ InputParameters validParams<LESsubgrid>();
 /**
  * This calculates the time derivative for a coupled variable
  **/
-class LESsubgrid : public INSMomentumBase
+class LESsubgrid : public DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>
 {
 public:
   LESsubgrid(const InputParameters & parameters);
@@ -34,7 +36,7 @@ protected:
   virtual Real computeQpOffDiagJacobianViscousPart(unsigned int jvar) override;
 
   const MaterialProperty<Real> & _mu_sgs;
-  const MaterialProperty<RankTwoTensor> & _dmu_dvel;
+  std::vector<const MaterialProperty<Real> *> _dmu_dvel;
 };
 
 #endif // LESSUBGRID_H

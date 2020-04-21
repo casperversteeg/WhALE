@@ -4,9 +4,9 @@
   transient_term = true
   integrate_p_by_parts = true
   family = LAGRANGE
-  order = FIRST
+  order = SECOND
   supg = true
-  pspg = true
+  # pspg = true
 []
 
 [Mesh]
@@ -19,7 +19,7 @@
     ymax = 1.0
     nx = 128
     ny = 128
-    elem_type = QUAD4
+    elem_type = QUAD9
   []
   [./corner_node]
     type = ExtraNodesetGenerator
@@ -163,7 +163,7 @@
     # space so that the Dirichlet conditions are the same regardless
     # of the mesh spacing.
     type = ParsedFunction
-    value = 'if(x > 0.0 & x < 1.0, 1, 0)'
+    value = 'if(x >= 0.0 & x <= 1.0, 1, 0)'
   [../]
 []
 
@@ -171,7 +171,7 @@
   [./SMP]
     type = SMP
     full = true
-    solve_type = 'NEWTON'
+    solve_type = 'PJFNK'
   [../]
 []
 
