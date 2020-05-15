@@ -23,29 +23,30 @@ validParams<LESsubgrid>()
 }
 
 LESsubgrid::LESsubgrid(const InputParameters & parameters)
-  : DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>(parameters),
+  : INSMomentumBase(parameters),
+    // : DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>(parameters),
     _mu_sgs(getMaterialProperty<Real>("mu_sgs_name")),
     _dmu_dvel(_coupled_moose_vars.size())
 {
-  for (unsigned i = 0; i < _coupled_moose_vars.size(); ++i)
-  {
-    _dmu_dvel[i] =
-        &getMaterialPropertyDerivative<Real>("mu_sgs_name", _coupled_moose_vars[i]->name());
-  }
+  // for (unsigned i = 0; i < _coupled_moose_vars.size(); ++i)
+  // {
+  //   _dmu_dvel[i] =
+  //       &getMaterialPropertyDerivative<Real>("mu_sgs_name", _coupled_moose_vars[i]->name());
+  // }
 }
 
 Real
 LESsubgrid::computeQpResidualViscousPart()
 {
   // Simplified version: mu * Laplacian(u_component)
-  return _mu_sgs[_qp] * (_grad_u[_qp] * _grad_test[_i][_qp]);
+  return (_mu[_qp] + _mu_sgs[_qp]) * (_grad_u[_qp] * _grad_test[_i][_qp]);
 }
 
 Real
 LESsubgrid::computeQpJacobianViscousPart()
 {
   // Viscous part, Laplacian version
-  return _mu_sgs[_qp] * (_grad_phi[_j][_qp] * _grad_test[_i][_qp]);
+  return (_mu[_qp] * _mu_sgs[_qp]) * (_grad_phi[_j][_qp] * _grad_test[_i][_qp]);
 }
 
 Real
@@ -54,6 +55,6 @@ LESsubgrid::computeQpOffDiagJacobianViscousPart(unsigned jvar)
   if (jvar == _p_var_number)
     return 0;
 
-  const unsigned int cvar = mapJvarToCvar(jvar);
+  // const unsigned int cvar = mapJvarToCvar(jvar);
   return 0; //(*_dmu_dvel[_j])[_qp] * _grad_test[_i][_qp];
 }

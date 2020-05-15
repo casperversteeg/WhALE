@@ -27,7 +27,7 @@ public:
   SmagorinskySGS(const InputParameters & parameters);
 
 protected:
-  virtual void computeQpProperties() override;
+  virtual void computeSGSviscosity() override;
 
   const Real _Cs;
 };

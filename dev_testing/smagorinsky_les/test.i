@@ -17,6 +17,8 @@
     xmax = 1.0
     ymin = 0
     ymax = 1.0
+    # nx = 32
+    # ny = 32
     nx = 128
     ny = 128
     elem_type = QUAD9
@@ -68,25 +70,25 @@
     p = p
   [../]
 
-  # x-momentum, space
-  [./x_momentum_space]
-    type = INSMomentumLaplaceForm
-    variable = vel_x
-    u = vel_x
-    v = vel_y
-    p = p
-    component = 0
-  [../]
-
-  # y-momentum, space
-  [./y_momentum_space]
-    type = INSMomentumLaplaceForm
-    variable = vel_y
-    u = vel_x
-    v = vel_y
-    p = p
-    component = 1
-  [../]
+  # # x-momentum, space
+  # [./x_momentum_space]
+  #   type = INSMomentumLaplaceForm
+  #   variable = vel_x
+  #   u = vel_x
+  #   v = vel_y
+  #   p = p
+  #   component = 0
+  # [../]
+  #
+  # # y-momentum, space
+  # [./y_momentum_space]
+  #   type = INSMomentumLaplaceForm
+  #   variable = vel_y
+  #   u = vel_x
+  #   v = vel_y
+  #   p = p
+  #   component = 1
+  # [../]
 
   [./les_x]
     type = LESsubgrid
@@ -159,7 +161,8 @@
 
 [Functions]
   [./lid_function]
-    # We pick a function that is exactly represented in the velocity
+    # We pick a function28
+    # ny = 1 that is exactly represented in the velocity
     # space so that the Dirichlet conditions are the same regardless
     # of the mesh spacing.
     type = ParsedFunction
@@ -192,6 +195,14 @@
 [Outputs]
   exodus = true
   print_linear_residuals = false
+[]
+
+[Postprocessors]
+  [max_mu_sgs]
+    type = ElementExtremeMaterialProperty
+    mat_prop = mu_sgs
+    value_type = 'max'
+  []
 []
 
 [Debug]

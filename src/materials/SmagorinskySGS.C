@@ -20,11 +20,10 @@ SmagorinskySGS::SmagorinskySGS(const InputParameters & parameters)
 }
 
 void
-SmagorinskySGS::computeQpProperties()
+SmagorinskySGS::computeSGSviscosity()
 {
   Real delta = std::cbrt(_current_elem_volume);
-  Real coef = _rho[_qp] * (_Cs * _Cs * delta * delta);
-
+  Real coef = std::min(_Cs * delta, 0.42 * _min_bnd_dist[_qp]);
   RankTwoTensor Sij(_grad_u_vel[_qp], _grad_v_vel[_qp], _grad_w_vel[_qp]);
   Sij = 0.5 * (Sij + Sij.transpose());
 
@@ -32,7 +31,7 @@ SmagorinskySGS::computeQpProperties()
 
   S_bar = std::sqrt(2 * S_bar);
 
-  _mu_sgs[_qp] = coef * S_bar;
+  _mu_sgs[_qp] = _rho[_qp] * coef * coef * S_bar;
   for (unsigned i = 0; i < _dmu_dvel.size(); ++i)
   {
     (*_dmu_dvel[i])[_qp] = 0; // coef * (Sij.column(i) * _grad_phi[_qp]) / S_bar;

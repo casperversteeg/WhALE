@@ -7,9 +7,6 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef LESSUBGRID_H
-#define LESSUBGRID_H
-
 #pragma once
 
 #include "INSMomentumBase.h"
@@ -25,7 +22,8 @@ InputParameters validParams<LESsubgrid>();
 /**
  * This calculates the time derivative for a coupled variable
  **/
-class LESsubgrid : public DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>
+// class LESsubgrid : public DerivativeMaterialInterface<JvarMapKernelInterface<INSMomentumBase>>
+class LESsubgrid : public INSMomentumBase
 {
 public:
   LESsubgrid(const InputParameters & parameters);
@@ -38,5 +36,3 @@ protected:
   const MaterialProperty<Real> & _mu_sgs;
   std::vector<const MaterialProperty<Real> *> _dmu_dvel;
 };
-
-#endif // LESSUBGRID_H

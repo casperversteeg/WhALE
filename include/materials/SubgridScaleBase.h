@@ -14,8 +14,12 @@
 #include "RankFourTensor.h"
 #include "RotationTensor.h"
 #include "DerivativeMaterialInterface.h"
+#include "NearestNodeLocator.h"
+#include "MooseMesh.h"
+#include "GeometricSearchData.h"
 
 class SubgridScaleBase;
+class NearestNodeLocator;
 
 template <>
 InputParameters validParams<SubgridScaleBase>();
@@ -32,6 +36,9 @@ public:
 
 protected:
   virtual void initQpStatefulProperties() override;
+  virtual void computeQpProperties() override;
+  virtual void computeSGSviscosity(){};
+  Real computeMinBndDistance();
 
   // Coupled variables
   const VariableValue & _u_vel;
@@ -56,4 +63,7 @@ protected:
 
   MaterialProperty<Real> & _mu_sgs;
   std::vector<MaterialProperty<Real> *> _dmu_dvel;
+
+  MaterialProperty<Real> & _min_bnd_dist;
+  const MaterialProperty<Real> & _min_bnd_dist_old;
 };
