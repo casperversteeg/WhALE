@@ -46,7 +46,7 @@ Real
 LESsubgrid::computeQpJacobianViscousPart()
 {
   // Viscous part, Laplacian version
-  return (_mu[_qp] * _mu_sgs[_qp]) * (_grad_phi[_j][_qp] * _grad_test[_i][_qp]);
+  return (_mu[_qp] + _mu_sgs[_qp]) * (_grad_phi[_j][_qp] * _grad_test[_i][_qp]);
 }
 
 Real

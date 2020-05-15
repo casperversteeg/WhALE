@@ -2,10 +2,10 @@
   gravity = '0 0 0'
   laplace = true
   transient_term = true
-  integrate_p_by_parts = true
+  integrate_p_by_parts = false
   family = LAGRANGE
   order = SECOND
-  supg = true
+  supg = false
   # pspg = true
 []
 
@@ -17,10 +17,10 @@
     xmax = 1.0
     ymin = 0
     ymax = 1.0
-    # nx = 32
-    # ny = 32
-    nx = 128
-    ny = 128
+    nx = 32
+    ny = 32
+    # nx = 128
+    # ny = 128
     elem_type = QUAD9
   []
   [./corner_node]
@@ -70,25 +70,25 @@
     p = p
   [../]
 
-  # # x-momentum, space
-  # [./x_momentum_space]
-  #   type = INSMomentumLaplaceForm
-  #   variable = vel_x
-  #   u = vel_x
-  #   v = vel_y
-  #   p = p
-  #   component = 0
-  # [../]
-  #
-  # # y-momentum, space
-  # [./y_momentum_space]
-  #   type = INSMomentumLaplaceForm
-  #   variable = vel_y
-  #   u = vel_x
-  #   v = vel_y
-  #   p = p
-  #   component = 1
-  # [../]
+  # x-momentum, space
+  [./x_momentum_space]
+    type = INSMomentumLaplaceForm
+    variable = vel_x
+    u = vel_x
+    v = vel_y
+    p = p
+    component = 0
+  [../]
+
+  # y-momentum, space
+  [./y_momentum_space]
+    type = INSMomentumLaplaceForm
+    variable = vel_y
+    u = vel_x
+    v = vel_y
+    p = p
+    component = 1
+  [../]
 
   [./les_x]
     type = LESsubgrid
