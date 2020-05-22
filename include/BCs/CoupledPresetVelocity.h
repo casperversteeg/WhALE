@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PresetNodalBC.h"
+#include "DirichletBCBase.h"
 
-class CoupledPresetVelocity : public PresetNodalBC
+class CoupledPresetVelocity : public DirichletBCBase
 {
 public:
   static InputParameters validParams();

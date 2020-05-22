@@ -6,7 +6,7 @@
   family = LAGRANGE
   order = SECOND
   supg = false
-  # pspg = true
+  pspg = false
 []
 
 [Mesh]
@@ -29,16 +29,24 @@
     nodes = '0'
     input = gen
   [../]
-  # [./lid_side]
-  #   type = SideSetsFromBoundingBoxGenerator
-  #   input = corner_node
-  #   block_id = 0
-  #   boundary_id_old = 'top'
-  #   boundary_id_new = 11
-  #   bottom_left = '0.01 0.99 0'
-  #   top_right = '0.99 1.01 0'
-  # [../]
 []
+
+# [AuxVariables]
+#   [muturb]
+#     family = MONOMIAL
+#     order = CONSTANT
+#   []
+# []
+#
+# [AuxKernels]
+#   [aux_musgs]
+#     type = LESsubgridViscosityAux
+#     variable = muturb
+#     u = vel_x
+#     v = vel_y
+#     # rho_name = 'rho'
+#   []
+# []
 
 [Variables]
   [./vel_x]
@@ -119,10 +127,12 @@
 
   [./lid]
     type = FunctionPenaltyDirichletBC
+    # type = FunctionDirichletBC
     variable = vel_x
     boundary = 'top'
     function = 'lid_function'
     penalty = 1e4
+    # preset = false
   [../]
 
   [./y_no_slip]
@@ -138,7 +148,7 @@
     variable = p
     boundary = 'pinned_node'
     value = 0
-    preset = true
+    preset = false
   [../]
 []
 
@@ -153,6 +163,7 @@
   [./mu_sgs]
     type = SmagorinskySGS
     block = 0
+    constant_on = none
     u = vel_x
     v = vel_y
     outputs = exodus
@@ -166,7 +177,8 @@
     # space so that the Dirichlet conditions are the same regardless
     # of the mesh spacing.
     type = ParsedFunction
-    value = 'if(x >= 0.0 & x <= 1.0, 1, 0)'
+    # value = 'if(x >= 0.0 & x <= 1.0, 1, 0)'
+    value = '1'
   [../]
 []
 

@@ -13,7 +13,7 @@ CoupledPresetVelocity::validParams()
 }
 
 CoupledPresetVelocity::CoupledPresetVelocity(const InputParameters & parameters)
-  : PresetNodalBC(parameters), _u_old(valueOld()), _v(coupledValue("v"))
+  : DirichletBCBase(parameters), _u_old(valueOld()), _v(coupledValue("v"))
 {
 }
 

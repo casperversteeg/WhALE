@@ -18,6 +18,7 @@ SubgridScaleBase::validParams()
   params.addCoupledVar("v", 0, "y-velocity component");
   params.addCoupledVar("w", 0, "z-velocity component");
 
+  // params.addRequiredParam("wall_bnd", "Wall boundary conditions");
   params.addParam<MaterialPropertyName>("rho_name", "rho", "The name of the density");
 
   return params;
@@ -60,7 +61,7 @@ SubgridScaleBase::SubgridScaleBase(const InputParameters & parameters)
 void
 SubgridScaleBase::initQpStatefulProperties()
 {
-  _mu_sgs[_qp] = 0;
+  computeSGSviscosity();
   _min_bnd_dist[_qp] = computeMinBndDistance();
   for (unsigned i = 0; i < _dmu_dvel.size(); ++i)
   {
