@@ -3,6 +3,9 @@
 # Global parameters that will be set for all kernels in the simulation
 [GlobalParams]
   use_displaced_mesh = true
+  family = LAGRANGE
+  order = FIRST
+  # displacements = 'disp_y'
 []
 
 # Load or build mesh file for this problem.
@@ -15,8 +18,8 @@
     ymin = -10e-6
     ymax = 0
     nx = 64
-    ny = 32
-    elem_type = QUAD4
+    ny = 16
+    elem_type = TRI3
   []
 []
 
@@ -33,9 +36,12 @@
     temperature = T
     # boundary = 'top'
     m = 4.48e-26
-    lvap = 10.78e6
+    # m = 1e-20
+    latent_vap = 10.78e6
+    Tb = 2743
     beta = 0.82
-    outputs = exodus
+    block = 0
+    # outputs = exodus
   []
   # [cp]
   #   type = GenericFunctionMaterial
@@ -47,17 +53,11 @@
 # Variables in the problem's governing equations which must be solved
 [Variables]
   [T]
-    family = LAGRANGE
-    order = FIRST
     initial_condition = 300
   []
-  [disp_z]
-    family = LAGRANGE
-    order = FIRST
+  [disp_y]
   []
   [sdot]
-    family = LAGRANGE
-    order = FIRST
   []
 []
 
@@ -78,24 +78,25 @@
     density = rho
     specific_heat = 'cp'
   []
-  [ale]
-    type = HertzKnudsenAblation
-    variable = T
-    in_normal = '0 -1 0'
-    velocity = '0 -1 0'
-    # sdot = sdot
-    upwinding_type = 'none'
-  []
+  # [ale]
+  #   type = HertzKnudsenAblation
+  #   variable = T
+  #   in_normal = '0 1 0'
+  #   velocity = '0 1 0'
+  #   # sdot = sdot
+  #   upwinding_type = 'full'
+  # []
 
 
   [sdot_nonlin]
     type = MaterialPropertyValue
     variable = sdot
     prop_name = sdot
+    positive = false
   []
   [laplacemesh]
     type = Diffusion
-    variable = disp_z
+    variable = disp_y
   []
 []
 
@@ -122,18 +123,18 @@
     type = DirichletBC
     variable = sdot
     value = 0
-    boundary = 'bottom'
+    boundary = 'bottom right'
   []
   [fix_bottom]
     type = DirichletBC
-    variable = disp_z
+    variable = disp_y
     value = 0
-    boundary = 'bottom'
+    boundary = 'bottom right'
   []
   [ablation]
     type = CoupledDirichletDotBC
     boundary = 'top'
-    variable = disp_z
+    variable = disp_y
     v = sdot
   []
 []
@@ -155,7 +156,7 @@
 # Type of algorithm and convergence parameters used to solve the matrix problem
 [Executioner]
   type = Transient
-  dt = 1e-10
+  dt = 1e-11
   end_time = 12e-9
   dtmin = 1e-14
   nl_rel_tol = 1e-10

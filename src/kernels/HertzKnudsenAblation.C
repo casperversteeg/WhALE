@@ -39,5 +39,5 @@ Real
 HertzKnudsenAblation::computeQpJacobian()
 {
   return _rho[_qp] * _cp[_qp] * _grad_test[_i][_qp] * _in_normal *
-         (_sdot[_qp] * _phi[_j][_qp] + _dsdot_dT[_qp] * _u[_qp]);
+         (_sdot[_qp] * _phi[_j][_qp] - 0 * _dsdot_dT[_qp] * _u[_qp]);
 }
