@@ -56,30 +56,34 @@
     prop_values = '${l} ${Gc} ${psic}'
   []
   [local_dissipation]
-    type = QuadraticLocalDissipation
+    type = LinearLocalDissipation
+    # type = QuadraticLocalDissipation
     d = 'd'
   []
   [fracture_properties]
     type = FractureMaterial
-    local_dissipation_norm = 2
+    local_dissipation_norm = 8/3
+    # local_dissipation_norm = 2
   []
   [degradation]
-    type = QuadraticDegradation
+    type = LorentzDegradation
+    # type = QuadraticDegradation
     d = 'd'
-    residual_degradation = 0
+    residual_degradation = 1e-9
+    # residual_degradation = 0
   []
 []
 
-[Preconditioning]
-  [SMP]
-    type = SMP
-    full = true
-  []
-[]
+# [Preconditioning]
+#   [SMP]
+#     type = SMP
+#     full = true
+#   []
+# []
 
 [Executioner]
   type = Transient
-  dt = 1e-7
+  # dt = 1e-7
   end_time = 200e-6
 
   nl_abs_tol = 1e-6
@@ -90,6 +94,7 @@
   petsc_options_value = 'asm      ilu          200         200                0                     vinewtonrsls'
 
   automatic_scaling = true
+  compute_scaling_once = false
   # [TimeIntegrator]
   #   type = NewmarkBeta
   #   beta = 0.25

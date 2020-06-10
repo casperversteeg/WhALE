@@ -1,11 +1,11 @@
 E = 70e9
 nu = 0.2
 rho = 2500
-T = 1e6
+T = 1e8
 
-l = 1.08e-6
+l = 5e-3
 Gc = 9
-psic = 4.3931e5
+psic = 114
 
 [GlobalParams]
   displacements = 'disp_x disp_y'
@@ -118,12 +118,15 @@ psic = 4.3931e5
   []
   [fracture_properties]
     type = FractureMaterial
-    local_dissipation_norm = 2
+    local_dissipation_norm = 8/3
+    # local_dissipation_norm = 2
   []
   [degradation]
-    type = QuadraticDegradation
+    type = LorentzDegradation
+    # type = QuadraticDegradation
     d = 'd'
-    residual_degradation = 0
+    residual_degradation = 1e-9
+    # residual_degradation = 0
   []
 []
 
@@ -166,19 +169,27 @@ psic = 4.3931e5
 
 [Executioner]
   type = Transient
-  dt = 1e-7
+  dt = 1.5e-8
   end_time = 200e-6
 
   nl_abs_tol = 1e-6
+  nl_rel_tol = 1e-8
+  l_max_its = 50
 
   solve_type = 'NEWTON'
 
   [TimeIntegrator]
-    type = CentralDifference
-    solve_type = lumped
-    # beta = 0.25
-    # gamma = 0.5
+    type = NewmarkBeta
+    beta = 0.25
+    gamma = 0.5
   []
+
+  # [TimeIntegrator]
+  #   type = CentralDifference
+  #   solve_type = lumped
+  #   # beta = 0.25
+  #   # gamma = 0.5
+  # []
 []
 
 [Outputs]
@@ -188,6 +199,6 @@ psic = 4.3931e5
 
 [Debug]
   # show_actions = true
-  # show_var_residual_norms = true
+  show_var_residual_norms = true
   # show_parser = true
 []
