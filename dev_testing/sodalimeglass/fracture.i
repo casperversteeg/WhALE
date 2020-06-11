@@ -74,12 +74,12 @@
   []
 []
 
-# [Preconditioning]
-#   [SMP]
-#     type = SMP
-#     full = true
-#   []
-# []
+[Preconditioning]
+  [SMP]
+    type = SMP
+    full = true
+  []
+[]
 
 [Executioner]
   type = Transient

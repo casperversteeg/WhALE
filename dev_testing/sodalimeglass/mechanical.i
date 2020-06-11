@@ -58,6 +58,10 @@ psic = 114
   [E_el_active]
     family = MONOMIAL
   []
+  [hmin]
+    order = CONSTANT
+    family = MONOMIAL
+  []
 []
 
 
@@ -96,6 +100,12 @@ psic = 114
     variable = 'E_el_active'
     property = 'E_el_active'
   []
+  [max_h]
+    type = ElementLengthAux
+    variable = hmin
+    method = min
+    execute_on = 'TIMESTEP_BEGIN'
+  []
 []
 
 [Materials]
@@ -103,6 +113,11 @@ psic = 114
     type = ADComputeIsotropicElasticityTensor
     youngs_modulus = '${E}'
     poissons_ratio = '${nu}'
+  []
+  [reg_elasticity_tensor]
+    type = MaterialConverter
+    ad_props_in = 'effective_stiffness'
+    reg_props_out = 'reg_effective_stiffness'
   []
   [elastic_strain]
     type = ADComputeSmallStrain
@@ -167,10 +182,21 @@ psic = 114
   []
 []
 
+[Postprocessors]
+  [explicit_dt]
+    type = BetterCriticalTimeStep
+    density_name = 'density'
+    E_name = 'reg_effective_stiffness'
+    # factor = 0.8
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
+  []
+[]
+
+
 [Executioner]
   type = Transient
-  dt = 1.5e-8
-  end_time = 200e-6
+  # dt = 2e-8
+  end_time = 1e-3
 
   nl_abs_tol = 1e-6
   nl_rel_tol = 1e-8
@@ -178,23 +204,31 @@ psic = 114
 
   solve_type = 'NEWTON'
 
-  [TimeIntegrator]
-    type = NewmarkBeta
-    beta = 0.25
-    gamma = 0.5
-  []
 
+  [TimeStepper]
+    type = PostprocessorDT
+    postprocessor = explicit_dt
+    scale = 0.9
+  []
+  [TimeIntegrator]
+    type = CentralDifference
+    solve_type = lumped
+  []
   # [TimeIntegrator]
-  #   type = CentralDifference
-  #   solve_type = lumped
-  #   # beta = 0.25
-  #   # gamma = 0.5
+  #   type = NewmarkBeta
+  #   beta = 0.25
+  #   gamma = 0.5
   # []
 []
 
 [Outputs]
   print_linear_residuals = false
   exodus = true
+  hide = 'explicit_dt'
+  [Console]
+    type = Console
+    outlier_variable_norms = false
+  []
 []
 
 [Debug]
