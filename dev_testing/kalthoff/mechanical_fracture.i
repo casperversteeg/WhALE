@@ -1,0 +1,167 @@
+[UserObjects]
+  [E_el_active]
+    type = ADFPIMaterialPropertyUserObject
+    mat_prop = 'E_el_active'
+  []
+[]
+
+[Mesh]
+  [fmg]
+    type = FileMeshGenerator
+    file = 'kalthoff.msh'
+  []
+[]
+
+[Variables]
+  [disp_x]
+  []
+  [disp_y]
+  []
+  [d]
+  []
+[]
+
+[AuxVariables]
+  [stress]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [bounds_dummy]
+  []
+[]
+
+[AuxKernels]
+  [stress]
+    type = ADRankTwoScalarAux
+    variable = 'stress'
+    rank_two_tensor = 'stress'
+    scalar_type = 'MaxPrincipal'
+    execute_on = 'TIMESTEP_END'
+  []
+[]
+
+[Bounds]
+  [irreversibility]
+    type = VariableOldValueBoundsAux
+    variable = 'bounds_dummy'
+    bounded_variable = 'd'
+    bound_type = lower
+  []
+  [upper]
+    type = ConstantBoundsAux
+    variable = 'bounds_dummy'
+    bounded_variable = 'd'
+    bound_type = upper
+    bound_value = 1
+  []
+[]
+
+[Kernels]
+  [inertia_x]
+    type = InertialForce
+    variable = 'disp_x'
+  []
+  [inertia_y]
+    type = InertialForce
+    variable = 'disp_y'
+  []
+  [solid_x]
+    type = ADStressDivergenceTensors
+    variable = 'disp_x'
+    component = 0
+    displacements = 'disp_x disp_y'
+  []
+  [solid_y]
+    type = ADStressDivergenceTensors
+    variable = 'disp_y'
+    component = 1
+    displacements = 'disp_x disp_y'
+  []
+  [pff_diff]
+    type = ADPFFDiffusion
+    variable = 'd'
+  []
+  [pff_barr]
+    type = ADPFFBarrier
+    variable = 'd'
+  []
+  [pff_react]
+    type = ADPFFReaction
+    variable = 'd'
+    driving_energy_uo = 'E_el_active'
+  []
+[]
+
+[BCs]
+  [xdisp]
+    type = FunctionDirichletBC
+    variable = 'disp_x'
+    boundary = 'load'
+    function = 'if(t<1e-6, 0.5*1.65e10*t*t, 1.65e4*t-0.5*1.65e-2)'
+    preset = false
+  []
+  [y_bot]
+    type = DirichletBC
+    variable = 'disp_y'
+    boundary = 'bottom'
+    value = '0'
+  []
+[]
+
+[Materials]
+  [bulk]
+    type = GenericConstantMaterial
+    prop_names = 'density phase_field_regularization_length energy_release_rate '
+                 'critical_fracture_energy'
+    prop_values = '8e-9 0.35 22.2 7.9'
+  []
+  [elasticity_tensor]
+    type = ADComputeIsotropicElasticityTensor
+    youngs_modulus = 1.9e5
+    poissons_ratio = 0.3
+  []
+  [strain]
+    type = ADComputeSmallStrain
+    displacements = 'disp_x disp_y'
+  []
+  [stress]
+    type = SmallStrainDegradedElasticPK2Stress_StrainSpectral
+    d = 'd'
+  []
+  [local_dissipation]
+    type = LinearLocalDissipation
+    d = 'd'
+  []
+  [fracture_properties]
+    type = FractureMaterial
+    local_dissipation_norm = 8/3
+  []
+  [degradation]
+    type = LorentzDegradation
+    d = 'd'
+    residual_degradation = 0
+  []
+[]
+
+[Executioner]
+  type = Transient
+  solve_type = NEWTON
+  petsc_options_iname = '-pc_type -pc_factor_mat_solver_package -snes_type'
+  petsc_options_value = 'lu       superlu_dist                  vinewtonrsls'
+  nl_abs_tol = 1e-08
+  nl_rel_tol = 1e-06
+  automatic_scaling = true
+  dt = 5e-7
+  end_time = 9e-5
+  fp_max_its = 10
+  fp_tol = 1e-06
+  [TimeIntegrator]
+    type = NewmarkBeta
+  []
+[]
+
+[Outputs]
+  print_linear_residuals = false
+  file_base = 'visualize_implicit'
+  exodus = true
+[]
